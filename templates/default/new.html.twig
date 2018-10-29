@@ -3,6 +3,8 @@
 {% block title %}RO MON{% endblock %}
 
 {% block body %}
+
+   {#  <input id="zaznamId" type="hidden" value=""> toto je to iste ako v data-zaznam-id #}
     <div>
 
     {#{% for zaznam in Zaznamy %}#}
@@ -15,13 +17,11 @@
 
     </div>
 
-    <form action="{{ path('form_action') }}"  id="horna-tab-form" method="post" xmlns="http://www.w3.org/1999/html">
-
-
+    <form id="horna-tab-form" data-zaznam-id="">
         <div class="row" id="navbar">
             <div class="col" id="den">
-                <select name="datum" title="DÁTUM" id="datum">
-                    <option selected></option>
+                <select name="den" title="DÁTUM" id="datum">
+                    <option selected value="-1"></option>
                     {% for datum in datumy %}
                         <option value="{{ datum }}">{{ datum }}</option>
                     {% endfor %}
@@ -31,6 +31,7 @@
             <div class="col" id="linka">
                 <!--label Linka-->
                 <select class="selectpicker shadow-sm linka" data-width="100%" title="LINKA" name="linka" disabled>
+                    <option selected value="-1"></option>
                     <option value="HC">HC</option>
                     <option value="MV">MV</option>
                 </select>
@@ -38,6 +39,7 @@
             <div class="col" id="uep">
                 <select class="selectpicker show-menu-arrow shadow-sm uep" data-width="100%" title="UEP" name="uep"
                         disabled>
+                    <option selected value="-1"></option>
                     <option value="HC1">HC1</option>
                     <option value="HC2">HC2</option>
                     <option value="HC3">HC3</option>
@@ -46,6 +48,7 @@
             </div>
             <div class="col" id="zmena">
                 <select class="selectpicker shadow-sm zmena" data-width="100%" title="Zmena" name="zmena" disabled>
+                    <option selected value="-1"></option>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option>

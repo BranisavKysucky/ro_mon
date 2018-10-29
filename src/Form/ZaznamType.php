@@ -14,13 +14,12 @@ class ZaznamType extends AbstractType
     public function buildForm ( FormBuilderInterface $builder , array $options )
     {
         $builder
-            ->add('den', DateType::class, ["widget"=>"single_text","format"=>"dd.MM.yyyy"])
+            ->add('den', DateType::class, ["widget"=>"single_text","format"=>"dd-MM-yyyy"])
             // -> add('den' ,TextType :: class )
             -> add('linka' ,TextType :: class )
             -> add('zmena' ,TextType  :: class )
             -> add('nadcas' ,NumberType :: class )
             -> add('uep' ,TextType :: class )
-
             -> add('suma_pracovnikov_monitor' ,NumberType :: class )
             -> add('suma_pracovnikov_operator' ,NumberType :: class )
             -> add('pn_lekar_monitor' ,NumberType :: class )
@@ -37,20 +36,16 @@ class ZaznamType extends AbstractType
             -> add('vypozicany_operator' ,NumberType :: class )
             -> add('nadcas_2_zmeny_monitor' ,NumberType :: class )
             -> add('nadcas_2_zmeny_operator' ,NumberType :: class )
-
-            -> add('zastavenia_text_fab' ,TextType :: class )
+            -> add('zastavenia_text_fab' ,TextType :: class, ['empty_data' => ''])
             -> add('zastavenia_int_fab' ,NumberType :: class )
-            -> add('udrzba_text' ,TextType :: class )
+            -> add('udrzba_text' ,TextType :: class, ['empty_data' => ''])
             -> add('udrzba_int' ,NumberType :: class )
-            -> add('logistika_text' ,TextType :: class )
+            -> add('logistika_text' ,TextType :: class, ['empty_data' => ''])
             -> add('logistika_int' ,NumberType :: class )
-            -> add('saturacia_text' ,TextType :: class )
+            -> add('saturacia_text' ,TextType :: class, ['empty_data' => ''])
             -> add('saturacia_int' ,NumberType :: class )
-            -> add('nedostatok_text' ,TextType :: class )
-            -> add('nedostatok_int' ,NumberType :: class )
-
-
-        ;
+            -> add('nedostatok_text' ,TextType :: class, ['empty_data' => ''])
+            -> add('nedostatok_int' ,NumberType :: class );
     }
 
     public function configureOptions ( OptionsResolver $resolver )
@@ -58,15 +53,12 @@ class ZaznamType extends AbstractType
         $resolver -> setDefaults ( array (
             'data_class' => Zaznam :: class ,
             'csrf_protection' => false,
+            'empty_data' => new Zaznam(),
         ));
-
-
-
-
     }
 
     public function getBlockPrefix()
     {
-        return ""; }
-
+        return "";
+    }
 }

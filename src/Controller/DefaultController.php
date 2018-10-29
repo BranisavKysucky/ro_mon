@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\Zaznam;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController ;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request ;
@@ -34,22 +35,51 @@ return $this->render('default/new.html.twig', [
     }
 
     /**
-     * @Route(path="/form", methods={"POST"}, name="form_action")
+     * @Route(path="/form/{zaznam}", methods={"POST"}, name="form_action")
      */
-    public function formAction(Request $request, EntityManagerInterface $em)
+    public function formAction(Zaznam $zaznam, Request $request, EntityManagerInterface $em)
     {
-        $zaznam = new Zaznam();
-        $form = $this->createForm(ZaznamType::class, $zaznam);
+        $zaznamData = new Zaznam();
+        $form = $this->createForm(ZaznamType::class, $zaznamData);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $zaznam->setNadcas($zaznamData->getNadcas());
+            $zaznam->setSumaPracovnikovMonitor($zaznamData->getSumaPracovnikovMonitor());
+            $zaznam->setSumaPracovnikovOperator($zaznamData->getSumaPracovnikovOperator());
+            $zaznam->setPnLekarMonitor($zaznamData->getPnLekarMonitor());
+            $zaznam->setPnLekarOperator($zaznamData->getPnLekarOperator());
+            $zaznam->setDovolenkaNvMonitor($zaznamData->getDovolenkaNvMonitor());
+            $zaznam->setDovolenkaNvOperator($zaznamData->getDovolenkaNvOperator());
+            $zaznam->setIneMonitor($zaznamData->getIneMonitor());
+            $zaznam->setIneOperator($zaznamData->getIneOperator());
+            $zaznam->setSkolenieMonitor($zaznamData->getSkolenieMonitor());
+            $zaznam->setSkolenieOperator($zaznamData->getSkolenieOperator());
+            $zaznam->setPozicanyMonitor($zaznamData->getPozicanyMonitor());
+            $zaznam->setPozicanyOperator($zaznamData->getPozicanyOperator());
+            $zaznam->setVypozicanyMonitor($zaznamData->getVypozicanyMonitor());
+            $zaznam->setVypozicanyOperator($zaznamData->getVypozicanyOperator());
+            $zaznam->setNadcas2ZmenyMonitor($zaznamData->getNadcas2ZmenyMonitor());
+            $zaznam->setNadcas2ZmenyOperator($zaznamData->getNadcas2ZmenyOperator());
+            $zaznam->setZastaveniaIntFab($zaznamData->getZastaveniaIntFab());
+            $zaznam->setZastaveniaTextFab($zaznamData->getZastaveniaTextFab());
+            $zaznam->setUdrzbaInt($zaznamData->getUdrzbaInt());
+            $zaznam->setUdrzbaText($zaznamData->getUdrzbaText());
+            $zaznam->setLogistikaInt($zaznamData->getLogistikaInt());
+            $zaznam->setLogistikaText($zaznamData->getLogistikaText());
+            $zaznam->setSaturaciaInt($zaznamData->getSaturaciaInt());
+            $zaznam->setSaturaciaText($zaznamData->getSaturaciaText());
+            $zaznam->setNedostatokInt($zaznamData->getNedostatokInt());
+            $zaznam->setNedostatokText($zaznamData->getNedostatokText());
+
+
             $em->persist($zaznam);
             $em->flush();
         }
 
 //        return new Response('Totot je telo', Response::HTTP_BAD_GATEWAY);
 
-        return $this->redirectToRoute('index_action');
+        return new JsonResponse();
     }
 
     /**
@@ -58,7 +88,9 @@ return $this->render('default/new.html.twig', [
     public function getDataAction(Request $request, EntityManagerInterface $em)
     {
         $data = $request->request->get('data', null);
-        /** @var Zaznam $zaznam */
+        /**
+         * @var Zaznam $zaznam
+         */
         $zaznam = $em->getRepository(Zaznam::class)->findOneBy([
             'den' => new \DateTime($data['den']),
             'linka'=> $data['linka'],
@@ -67,129 +99,26 @@ return $this->render('default/new.html.twig', [
         ]);
 
         if (empty($zaznam)) {
-            return new JsonResponse([
-                'nadcas' => 0,
-                'suma_pracovnikov_m' => 0,
-                'suma_pracovnikov_o' => 0,
-                'pn_lekar_m' => 0,
-                'pn_lekar_o' => 0,
-                'dovolenka_nv_m' => 0,
-                'dovolenka_nv_o' => 0,
-                'ine_m' => 0,
-                'ine_o' => 0,
-                'skolenie_m' => 0,
-                'skolenie_o' => 0,
-                'pozicany_m' => 0,
-                'pozicany_o' => 0,
-                'vypozicany_m' => 0,
-                'vypozicany_o' => 0,
-                'nadcas_2_zmeny_m' => 0,
-                'nadcas_2_zmeny_o' => 0,
+            $zaznam = new Zaznam();
+            $zaznam->setDen( new \DateTime($data['den']));
+            $zaznam->setLinka($data['linka']);
+            $zaznam->setUep($data['uep']);
+            $zaznam->setZmena($data['zmena']);
 
-                'zastavenia_text_f' => 0,
-                'zastavenia_int_f' => 0,
-                'udrzba_t' => 0,
-                'udrzba_i' => 0,
-                'logistika_t' => 0,
-                'logistika_i' => 0,
-                'saturacia_t' => 0,
-                'saturacia_i' => 0,
-                'nedostatok_t' => 0,
-                'nedostatok_i' => 0,
+            $em->persist($zaznam);
+            $em->flush();
+
+            return new JsonResponse([
+                'zaznamId' => $zaznam->getId(),
+                'zaznamData' => $zaznam->toArray(),
             ]);
         } else {
-            //return new JsonResponse($zaznam->toArray());
-
-            $data = [
-                'nadcas' => $zaznam->getNadcas(),
-                'suma_pracovnikov_m' => $zaznam->getSumaPracovnikovMonitor(),
-                'suma_pracovnikov_o' => $zaznam->getSumaPracovnikovOperator(),
-                'suma_pracovnikov_m' => $zaznam->getSumaPracovnikovMonitor(),
-                'suma_pracovnikov_o' => $zaznam->getSumaPracovnikovOperator(),
-                'pn_lekar_m' => $zaznam->getPnLekarMonitor(),
-                'pn_lekar_o' => $zaznam->getPnLekarOperator(),
-                'dovolenka_nv_m' => $zaznam->getDovolenkaNvMonitor(),
-                'dovolenka_nv_o' => $zaznam->getDovolenkaNvOperator(),
-                'ine_m' => $zaznam->getIneMonitor(),
-                'ine_o' => $zaznam->getIneOperator(),
-                'skolenie_m' => $zaznam->getSkolenieMonitor(),
-                'skolenie_o' => $zaznam->getSkolenieOperator(),
-                'pozicany_m' => $zaznam->getPozicanyMonitor(),
-                'pozicany_o' => $zaznam->getPozicanyOperator(),
-                'vypozicany_m' => $zaznam->getVypozicanyMonitor(),
-                'vypozicany_o' => $zaznam->getVypozicanyOperator(),
-                'nadcas_2_zmeny_m' => $zaznam->getNadcas2ZmenyMonitor(),
-                'nadcas_2_zmeny_o' => $zaznam->getNadcas2ZmenyOperator(),
-
-                'zastavenia_text_f' => $zaznam->getZastaveniaTextFab(),
-                'zastavenia_int_f' => $zaznam->getZastaveniaIntFab(),
-                'udrzba_t' => $zaznam->getUdrzbaText(),
-                'udrzba_i' => $zaznam->getUdrzbaInt(),
-                'logistika_t' => $zaznam->getLogistikaText(),
-                'logistika_i' => $zaznam->getLogistikaInt(),
-                'saturacia_t' => $zaznam->getSaturaciaText(),
-                'saturacia_i' => $zaznam->getSaturaciaInt(),
-                'nedostatok_t' => $zaznam->getNedostatokText(),
-                'nedostatok_i' => $zaznam->getNedostatokInt(),
-            ];
+            return new JsonResponse([
+                'zaznamId' => $zaznam->getId(),
+                'zaznamData' => $zaznam->toArray(),
+            ]);
         }
-
-        return new JsonResponse($data);
     }
-
-    /**
-     * @Route("/update/{id}", name="update")
-     */
-    public function update($id)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $zaznam = $entityManager->getRepository(Zaznam :: class)->find($id);
-        if (!$zaznam) {
-            throw $this->createNotFoundException(
-                'No product found for id ' . $id
-            );
-        }
-        $zaznam->setUep('HC3');
-        $entityManager->flush();
-
-        return $this->redirectToRoute('index_action');
-        //  return $this -> redirectToRoute ( 'update' , [
-        //     'id' => $zaznam -> getId ()
-        // ]);
-
-    }
-
-
-
-    /**
-     * @Route("/show/{id}", name="show")
-     */
-    public function show ( $id )
-    {
-        $udrzbatext = $this -> getDoctrine ()
-
-            -> getRepository ( Zaznam :: class )
-            ->findAll();
-//            -> find ($id );
-
-//        if ( ! $udrzbatext ) {
-//            throw $this -> createNotFoundException (
-//                'No product found for id ' . $id
-//            );
-//        }
-
-       // return new Response ( 'UdrzbaText: ' . $udrzbatext -> getUdrzbaText());
-        return $this->render('default/new.html.twig', ['Zaznamy' => $udrzbatext]);
-
-
-        // or render a template
-        // in the template, print things with {{ product.name }}
-        // return $this->render('product/show.html.twig', ['product' => $product]);
-    }
-
-
-
-
 
 }
 

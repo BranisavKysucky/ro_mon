@@ -15,8 +15,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Zaznam
 {
-
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -25,6 +23,8 @@ class Zaznam
     private $id;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime")
      */
     private $den;
@@ -40,9 +40,11 @@ class Zaznam
     private $zmena;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $nadcas;
+    private $nadcas =0;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -51,134 +53,700 @@ class Zaznam
 
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $suma_pracovnikov_monitor;
+    private $suma_pracovnikov_monitor = 0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $suma_pracovnikov_operator;
+    private $suma_pracovnikov_operator =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $pn_lekar_monitor;
+    private $pn_lekar_monitor =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $pn_lekar_operator;
+    private $pn_lekar_operator =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $dovolenka_nv_monitor;
+    private $dovolenka_nv_monitor =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $dovolenka_nv_operator;
+    private $dovolenka_nv_operator =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $ine_monitor;
+    private $ine_monitor =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $ine_operator;
+    private $ine_operator =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $skolenie_monitor;
+    private $skolenie_monitor =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $skolenie_operator;
+    private $skolenie_operator =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $pozicany_monitor;
+    private $pozicany_monitor =0;
 
     /**
-     * @ORM\Column(type="integer",nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer",options={"unsigned":true, "default":0})
      */
-    private $pozicany_operator;
+    private $pozicany_operator =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $vypozicany_monitor;
+    private $vypozicany_monitor =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $vypozicany_operator;
+    private $vypozicany_operator =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $nadcas_2_zmeny_monitor;
+    private $nadcas_2_zmeny_monitor =0;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $nadcas_2_zmeny_operator;
+    private $nadcas_2_zmeny_operator =0;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $zastavenia_text_fab;
+    private $zastavenia_text_fab = "";
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $zastavenia_int_fab;
+    private $zastavenia_int_fab=0;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $udrzba_text;
+    private $udrzba_text = "";
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $udrzba_int;
+    private $udrzba_int =0;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $logistika_text;
+    private $logistika_text ="";
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $logistika_int;
+    private $logistika_int =0;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $saturacia_text;
+    private $saturacia_text ="";
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $saturacia_int;
+    private $saturacia_int =0;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $nedostatok_text;
+    private $nedostatok_text ="";
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     *
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $nedostatok_int;
+    private $nedostatok_int =0;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDen(): ?\DateTime
+    {
+        return $this->den;
+    }
+
+    /**
+     * @param \DateTime $den
+     */
+    public function setDen(\DateTime $den): void
+    {
+        $this->den = new \DateTime($den->format('Y-m-d'));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLinka()
+    {
+        return $this->linka;
+    }
+
+    /**
+     * @param mixed $linka
+     */
+    public function setLinka($linka): void
+    {
+        $this->linka = $linka;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZmena()
+    {
+        return $this->zmena;
+    }
+
+    /**
+     * @param mixed $zmena
+     */
+    public function setZmena($zmena): void
+    {
+        $this->zmena = $zmena;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNadcas(): int
+    {
+        return $this->nadcas;
+    }
+
+    /**
+     * @param int $nadcas
+     */
+    public function setNadcas(int $nadcas): void
+    {
+        $this->nadcas = $nadcas;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUep()
+    {
+        return $this->uep;
+    }
+
+    /**
+     * @param mixed $uep
+     */
+    public function setUep($uep): void
+    {
+        $this->uep = $uep;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSumaPracovnikovMonitor(): int
+    {
+        return $this->suma_pracovnikov_monitor;
+    }
+
+    /**
+     * @param int $suma_pracovnikov_monitor
+     */
+    public function setSumaPracovnikovMonitor(int $suma_pracovnikov_monitor): void
+    {
+        $this->suma_pracovnikov_monitor = $suma_pracovnikov_monitor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSumaPracovnikovOperator(): int
+    {
+        return $this->suma_pracovnikov_operator;
+    }
+
+    /**
+     * @param int $suma_pracovnikov_operator
+     */
+    public function setSumaPracovnikovOperator(int $suma_pracovnikov_operator): void
+    {
+        $this->suma_pracovnikov_operator = $suma_pracovnikov_operator;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPnLekarMonitor(): int
+    {
+        return $this->pn_lekar_monitor;
+    }
+
+    /**
+     * @param int $pn_lekar_monitor
+     */
+    public function setPnLekarMonitor(int $pn_lekar_monitor): void
+    {
+        $this->pn_lekar_monitor = $pn_lekar_monitor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPnLekarOperator(): int
+    {
+        return $this->pn_lekar_operator;
+    }
+
+    /**
+     * @param int $pn_lekar_operator
+     */
+    public function setPnLekarOperator(int $pn_lekar_operator): void
+    {
+        $this->pn_lekar_operator = $pn_lekar_operator;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDovolenkaNvMonitor(): int
+    {
+        return $this->dovolenka_nv_monitor;
+    }
+
+    /**
+     * @param int $dovolenka_nv_monitor
+     */
+    public function setDovolenkaNvMonitor(int $dovolenka_nv_monitor): void
+    {
+        $this->dovolenka_nv_monitor = $dovolenka_nv_monitor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDovolenkaNvOperator(): int
+    {
+        return $this->dovolenka_nv_operator;
+    }
+
+    /**
+     * @param int $dovolenka_nv_operator
+     */
+    public function setDovolenkaNvOperator(int $dovolenka_nv_operator): void
+    {
+        $this->dovolenka_nv_operator = $dovolenka_nv_operator;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIneMonitor(): int
+    {
+        return $this->ine_monitor;
+    }
+
+    /**
+     * @param int $ine_monitor
+     */
+    public function setIneMonitor(int $ine_monitor): void
+    {
+        $this->ine_monitor = $ine_monitor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIneOperator(): int
+    {
+        return $this->ine_operator;
+    }
+
+    /**
+     * @param int $ine_operator
+     */
+    public function setIneOperator(int $ine_operator): void
+    {
+        $this->ine_operator = $ine_operator;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSkolenieMonitor(): int
+    {
+        return $this->skolenie_monitor;
+    }
+
+    /**
+     * @param int $skolenie_monitor
+     */
+    public function setSkolenieMonitor(int $skolenie_monitor): void
+    {
+        $this->skolenie_monitor = $skolenie_monitor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSkolenieOperator(): int
+    {
+        return $this->skolenie_operator;
+    }
+
+    /**
+     * @param int $skolenie_operator
+     */
+    public function setSkolenieOperator(int $skolenie_operator): void
+    {
+        $this->skolenie_operator = $skolenie_operator;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPozicanyMonitor(): int
+    {
+        return $this->pozicany_monitor;
+    }
+
+    /**
+     * @param int $pozicany_monitor
+     */
+    public function setPozicanyMonitor(int $pozicany_monitor): void
+    {
+        $this->pozicany_monitor = $pozicany_monitor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPozicanyOperator(): int
+    {
+        return $this->pozicany_operator;
+    }
+
+    /**
+     * @param int $pozicany_operator
+     */
+    public function setPozicanyOperator(int $pozicany_operator): void
+    {
+        $this->pozicany_operator = $pozicany_operator;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVypozicanyMonitor(): int
+    {
+        return $this->vypozicany_monitor;
+    }
+
+    /**
+     * @param int $vypozicany_monitor
+     */
+    public function setVypozicanyMonitor(int $vypozicany_monitor): void
+    {
+        $this->vypozicany_monitor = $vypozicany_monitor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVypozicanyOperator(): int
+    {
+        return $this->vypozicany_operator;
+    }
+
+    /**
+     * @param int $vypozicany_operator
+     */
+    public function setVypozicanyOperator(int $vypozicany_operator): void
+    {
+        $this->vypozicany_operator = $vypozicany_operator;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNadcas2ZmenyMonitor(): int
+    {
+        return $this->nadcas_2_zmeny_monitor;
+    }
+
+    /**
+     * @param int $nadcas_2_zmeny_monitor
+     */
+    public function setNadcas2ZmenyMonitor(int $nadcas_2_zmeny_monitor): void
+    {
+        $this->nadcas_2_zmeny_monitor = $nadcas_2_zmeny_monitor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNadcas2ZmenyOperator(): int
+    {
+        return $this->nadcas_2_zmeny_operator;
+    }
+
+    /**
+     * @param int $nadcas_2_zmeny_operator
+     */
+    public function setNadcas2ZmenyOperator(int $nadcas_2_zmeny_operator): void
+    {
+        $this->nadcas_2_zmeny_operator = $nadcas_2_zmeny_operator;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZastaveniaTextFab(): string
+    {
+        return $this->zastavenia_text_fab;
+    }
+
+    /**
+     * @param string $zastavenia_text_fab
+     */
+    public function setZastaveniaTextFab(string $zastavenia_text_fab): void
+    {
+        $this->zastavenia_text_fab = $zastavenia_text_fab;
+    }
+
+    /**
+     * @return int
+     */
+    public function getZastaveniaIntFab(): int
+    {
+        return $this->zastavenia_int_fab;
+    }
+
+    /**
+     * @param int $zastavenia_int_fab
+     */
+    public function setZastaveniaIntFab(int $zastavenia_int_fab): void
+    {
+        $this->zastavenia_int_fab = $zastavenia_int_fab;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUdrzbaText(): string
+    {
+        return $this->udrzba_text;
+    }
+
+    /**
+     * @param string $udrzba_text
+     */
+    public function setUdrzbaText(string $udrzba_text): void
+    {
+        $this->udrzba_text = $udrzba_text;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUdrzbaInt(): int
+    {
+        return $this->udrzba_int;
+    }
+
+    /**
+     * @param int $udrzba_int
+     */
+    public function setUdrzbaInt(int $udrzba_int): void
+    {
+        $this->udrzba_int = $udrzba_int;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogistikaText(): string
+    {
+        return $this->logistika_text;
+    }
+
+    /**
+     * @param string $logistika_text
+     */
+    public function setLogistikaText(string $logistika_text): void
+    {
+        $this->logistika_text = $logistika_text;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLogistikaInt(): int
+    {
+        return $this->logistika_int;
+    }
+
+    /**
+     * @param int $logistika_int
+     */
+    public function setLogistikaInt(int $logistika_int): void
+    {
+        $this->logistika_int = $logistika_int;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSaturaciaText(): string
+    {
+        return $this->saturacia_text;
+    }
+
+    /**
+     * @param string $saturacia_text
+     */
+    public function setSaturaciaText(string $saturacia_text): void
+    {
+        $this->saturacia_text = $saturacia_text;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSaturaciaInt(): int
+    {
+        return $this->saturacia_int;
+    }
+
+    /**
+     * @param int $saturacia_int
+     */
+    public function setSaturaciaInt(int $saturacia_int): void
+    {
+        $this->saturacia_int = $saturacia_int;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNedostatokText(): string
+    {
+        return $this->nedostatok_text;
+    }
+
+    /**
+     * @param string $nedostatok_text
+     */
+    public function setNedostatokText(string $nedostatok_text): void
+    {
+        $this->nedostatok_text = $nedostatok_text;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNedostatokInt(): int
+    {
+        return $this->nedostatok_int;
+    }
+
+    /**
+     * @param int $nedostatok_int
+     */
+    public function setNedostatokInt(int $nedostatok_int): void
+    {
+        $this->nedostatok_int = $nedostatok_int;
+    }
+
+
 
 //    /**
 //     * @ORM\Column(type="float")
@@ -192,391 +760,36 @@ class Zaznam
 
 
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getDen(): ?\DateTimeInterface
-    {
-        return $this->den;
-    }
-
-    public function setDen(\DateTimeInterface $den): self
-    {
-        $this->den = $den;
-
-        return $this;
-    }
-
-    public function getLinka(): ?string
-    {
-        return $this->linka;
-    }
-
-    public function setLinka(string $linka): self
-    {
-        $this->linka = $linka;
-
-        return $this;
-    }
-
-    public function getZmena(): ?string
-    {
-        return $this->zmena;
-    }
-
-    public function setZmena(string $zmena): self
-    {
-        $this->zmena = $zmena;
-
-        return $this;
-    }
-
-    public function getNadcas(): ?int
-    {
-        return $this->nadcas;
-    }
-
-    public function setNadcas(int $nadcas): self
-    {
-        $this->nadcas = $nadcas;
-
-        return $this;
-    }
-
-    public function getUep(): ?string
-    {
-        return $this->uep;
-    }
-
-    public function setUep(string $uep): self
-    {
-        $this->uep = $uep;
-
-        return $this;
-    }
-
-
-
-    public function getSumaPracovnikovMonitor(): ?int
-    {
-        return $this->suma_pracovnikov_monitor;
-    }
-
-    public function setSumaPracovnikovMonitor(int $suma_pracovnikov_monitor): self
-    {
-        $this->suma_pracovnikov_monitor = $suma_pracovnikov_monitor;
-
-        return $this;
-    }
-
-    public function getSumaPracovnikovOperator(): ?int
-    {
-        return $this->suma_pracovnikov_operator;
-    }
-
-    public function setSumaPracovnikovOperator(int $suma_pracovnikov_operator): self
-    {
-        $this->suma_pracovnikov_operator = $suma_pracovnikov_operator;
-
-        return $this;
-    }
-
-    public function getPnLekarMonitor(): ?int
-    {
-        return $this->pn_lekar_monitor;
-    }
-
-    public function setPnLekarMonitor(int $pn_lekar_monitor): self
-    {
-        $this->pn_lekar_monitor = $pn_lekar_monitor;
-
-        return $this;
-    }
-
-    public function getPnLekarOperator(): ?int
-    {
-        return $this->pn_lekar_operator;
-    }
-
-    public function setPnLekarOperator(int $pn_lekar_operator): self
-    {
-        $this->pn_lekar_operator = $pn_lekar_operator;
-
-        return $this;
-    }
-
-    public function getDovolenkaNvMonitor(): ?int
-    {
-        return $this->dovolenka_nv_monitor;
-    }
-
-    public function setDovolenkaNvMonitor(int $dovolenka_nv_monitor): self
-    {
-        $this->dovolenka_nv_monitor = $dovolenka_nv_monitor;
-
-        return $this;
-    }
-
-    public function getDovolenkaNvOperator(): ?int
-    {
-        return $this->dovolenka_nv_operator;
-    }
-
-    public function setDovolenkaNvOperator(int $dovolenka_nv_operator): self
-    {
-        $this->dovolenka_nv_operator = $dovolenka_nv_operator;
-
-        return $this;
-    }
-
-    public function getIneMonitor(): ?int
-    {
-        return $this->ine_monitor;
-    }
-
-    public function setIneMonitor(int $ine_monitor): self
-    {
-        $this->ine_monitor = $ine_monitor;
-
-        return $this;
-    }
-
-    public function getIneOperator(): ?int
-    {
-        return $this->ine_operator;
-    }
-
-    public function setIneOperator(int $ine_operator): self
-    {
-        $this->ine_operator = $ine_operator;
-
-        return $this;
-    }
-
-    public function getSkolenieMonitor(): ?int
-    {
-        return $this->skolenie_monitor;
-    }
-
-    public function setSkolenieMonitor(int $skolenie_monitor): self
-    {
-        $this->skolenie_monitor = $skolenie_monitor;
-
-        return $this;
-    }
-
-    public function getSkolenieOperator(): ?int
-    {
-        return $this->skolenie_operator;
-    }
-
-    public function setSkolenieOperator(int $skolenie_operator): self
-    {
-        $this->skolenie_operator = $skolenie_operator;
-
-        return $this;
-    }
-
-    public function getPozicanyMonitor(): ?int
-    {
-        return $this->pozicany_monitor;
-    }
-
-    public function setPozicanyMonitor(int $pozicany_monitor): self
-    {
-        $this->pozicany_monitor = $pozicany_monitor;
-
-        return $this;
-    }
-
-    public function getPozicanyOperator(): ?int
-    {
-        return $this->pozicany_operator;
-    }
-
-    public function setPozicanyOperator(int $pozicany_operator): self
-    {
-        $this->pozicany_operator = $pozicany_operator;
-
-        return $this;
-    }
-
-    public function getVypozicanyMonitor(): ?int
-    {
-        return $this->vypozicany_monitor;
-    }
-
-    public function setVypozicanyMonitor(int $vypozicany_monitor): self
-    {
-        $this->vypozicany_monitor = $vypozicany_monitor;
-
-        return $this;
-    }
-
-    public function getVypozicanyOperator(): ?int
-    {
-        return $this->vypozicany_operator;
-    }
-
-    public function setVypozicanyOperator(int $vypozicany_operator): self
-    {
-        $this->vypozicany_operator = $vypozicany_operator;
-
-        return $this;
-    }
-
-    public function getNadcas2ZmenyMonitor(): ?int
-    {
-        return $this->nadcas_2_zmeny_monitor;
-    }
-
-    public function setNadcas2ZmenyMonitor(int $nadcas_2_zmeny_monitor): self
-    {
-        $this->nadcas_2_zmeny_monitor = $nadcas_2_zmeny_monitor;
-
-        return $this;
-    }
-
-    public function getNadcas2ZmenyOperator(): ?int
-    {
-        return $this->nadcas_2_zmeny_operator;
-    }
-
-    public function setNadcas2ZmenyOperator(int $nadcas_2_zmeny_operator): self
-    {
-        $this->nadcas_2_zmeny_operator = $nadcas_2_zmeny_operator;
-
-        return $this;
-    }
-
-
-
-    public function getZastaveniaTextFab(): ?string
-    {
-        return $this->zastavenia_text_fab;
-    }
-
-    public function setZastaveniaTextFab(string $zastavenia_text_fab): self
-    {
-        $this->zastavenia_text_fab = $zastavenia_text_fab;
-
-        return $this;
-    }
-
-    public function getZastaveniaIntFab(): ?int
-    {
-        return $this->zastavenia_int_fab;
-    }
-
-    public function setZastaveniaIntFab(int $zastavenia_int_fab): self
-    {
-        $this->zastavenia_int_fab = $zastavenia_int_fab;
-
-        return $this;
-    }
-
-    public function getUdrzbaText(): ?string
-    {
-        return $this->udrzba_text;
-    }
-
-    public function setUdrzbaText(string $udrzba_text): self
-    {
-        $this->udrzba_text = $udrzba_text;
-
-        return $this;
-    }
-
-    public function getUdrzbaInt(): ?int
-    {
-        return $this->udrzba_int;
-    }
-
-    public function setUdrzbaInt(int $udrzba_int): self
-    {
-        $this->udrzba_int = $udrzba_int;
-
-        return $this;
-    }
-
-    public function getLogistikaText(): ?string
-    {
-        return $this->logistika_text;
-    }
-
-    public function setLogistikaText(string $logistika_text): self
-    {
-        $this->logistika_text = $logistika_text;
-
-        return $this;
-    }
-
-    public function getLogistikaInt(): ?int
-    {
-        return $this->logistika_int;
-    }
-
-    public function setLogistikaInt(int $logistika_int): self
-    {
-        $this->logistika_int = $logistika_int;
-
-        return $this;
-    }
-
-    public function getSaturaciaText(): ?string
-    {
-        return $this->saturacia_text;
-    }
-
-    public function setSaturaciaText(string $saturacia_text): self
-    {
-        $this->saturacia_text = $saturacia_text;
-
-        return $this;
-    }
-
-    public function getSaturaciaInt(): ?int
-    {
-        return $this->saturacia_int;
-    }
-
-    public function setSaturaciaInt(int $saturacia_int): self
-    {
-        $this->saturacia_int = $saturacia_int;
-
-        return $this;
-    }
-
-    public function getNedostatokText(): ?string
-    {
-        return $this->nedostatok_text;
-    }
-
-    public function setNedostatokText(string $nedostatok_text): self
-    {
-        $this->nedostatok_text = $nedostatok_text;
-
-        return $this;
-    }
-
-    public function getNedostatokInt(): ?int
-    {
-        return $this->nedostatok_int;
-    }
-
-    public function setNedostatokInt(int $nedostatok_int): self
-    {
-        $this->nedostatok_int = $nedostatok_int;
-
-        return $this;
-    }
-
     public function toArray(): array
     {
         return [
             'nadcas' => $this->nadcas,
+            'suma_pracovnikov_m' => $this->suma_pracovnikov_monitor,
+            'suma_pracovnikov_o' => $this->suma_pracovnikov_operator,
+            'pn_lekar_m' => $this->pn_lekar_monitor,
+            'pn_lekar_o' => $this->pn_lekar_operator,
+            'dovolenka_nv_m' => $this->dovolenka_nv_monitor,
+            'dovolenka_nv_o' => $this->dovolenka_nv_operator,
+            'ine_m' => $this->ine_monitor,
+            'ine_o' => $this->ine_operator,
+            'skolenie_m' => $this->skolenie_monitor,
+            'skolenie_o' => $this->skolenie_operator,
+            'pozicany_m' => $this->pozicany_monitor,
+            'pozicany_o' => $this->pozicany_operator,
+            'vypozicany_m' => $this->vypozicany_monitor,
+            'vypozicany_o' => $this->vypozicany_operator,
+            'nadcas_2_zmeny_m' => $this->nadcas_2_zmeny_monitor,
+            'nadcas_2_zmeny_o' => $this->nadcas_2_zmeny_operator,
+            'zastavenia_text_f' => $this->zastavenia_text_fab,
+            'zastavenia_int_f' => $this->zastavenia_int_fab,
+            'udrzba_t' => $this->udrzba_text,
+            'udrzba_i' => $this->udrzba_int,
+            'logistika_t' => $this->logistika_text,
+            'logistika_i' => $this->logistika_int,
+            'saturacia_t' => $this->saturacia_text,
+            'saturacia_i' => $this->saturacia_int,
+            'nedostatok_t' => $this->nedostatok_text,
+            'nedostatok_i' => $this->nedostatok_int,
         ];
     }
 
