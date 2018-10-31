@@ -2,42 +2,31 @@
 
 {% block title %}RO MON{% endblock %}
 
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+{% endblock %}
+
 {% block body %}
-
-   {#  <input id="zaznamId" type="hidden" value=""> toto je to iste ako v data-zaznam-id #}
-    <div>
-
-    {#{% for zaznam in Zaznamy %}#}
-        {#<ul>#}
-        {#<li>{{ zaznam.id }}</li>#}
-        {#<li>{{ zaznam.den|date('d.M.Y') }}</li>#}
-        {#<li>{{ zaznam.udrzbaText }}</li>#}
-        {#</ul>#}
-    {#{% endfor %}#}
-
-    </div>
-
     <form id="horna-tab-form" data-zaznam-id="">
         <div class="row" id="navbar">
             <div class="col" id="den">
-                <select name="den" title="DÁTUM" id="datum">
+                <select name="den" title="DÁTUM" id="datum" class="selectpicker search-control">
                     <option selected value="-1"></option>
                     {% for datum in datumy %}
                         <option value="{{ datum }}">{{ datum }}</option>
                     {% endfor %}
                 </select>
-
             </div>
             <div class="col" id="linka">
                 <!--label Linka-->
-                <select class="selectpicker shadow-sm linka" data-width="100%" title="LINKA" name="linka" disabled>
+                <select class="selectpicker shadow-sm linka search-control" data-width="100%" title="LINKA" name="linka" disabled>
                     <option selected value="-1"></option>
                     <option value="HC">HC</option>
                     <option value="MV">MV</option>
                 </select>
             </div>
             <div class="col" id="uep">
-                <select class="selectpicker show-menu-arrow shadow-sm uep" data-width="100%" title="UEP" name="uep"
+                <select class="selectpicker show-menu-arrow shadow-sm uep search-control" data-width="100%" title="UEP" name="uep"
                         disabled>
                     <option selected value="-1"></option>
                     <option value="HC1">HC1</option>
@@ -47,7 +36,7 @@
                 </select>
             </div>
             <div class="col" id="zmena">
-                <select class="selectpicker shadow-sm zmena" data-width="100%" title="Zmena" name="zmena" disabled>
+                <select class="selectpicker shadow-sm zmena search-control" data-width="100%" title="Zmena" name="zmena" disabled>
                     <option selected value="-1"></option>
                     <option value="A">A</option>
                     <option value="B">B</option>
@@ -56,31 +45,21 @@
                 </select>
             </div>
             <div class="col">
-                <input id="nadcas" class="form-control form-control nadcas" type="text" title="Nadcas" name="nadcas"
-                       placeholder="Nadčas" disabled/>
+                <input id="nadcas" class="form-control nadcas" title="Nadcas" name="nadcas" placeholder="Nadčas"
+                       disabled/>
             </div>
         </div>
-        <div class="col">
-         {#     <button type="submit">Click Me!</button>    #}
-        </div>
 
-
-    {#Druhy formular  dochadzka                #}
-
-    <div class="row" id="telo">
-        <div class="col" id="Dochadzka">
+        <div class="row" id="telo">
+            <div class="col" id="Dochadzka">
                 <div class="row karta" id="kartaDochadzka"></div>
                 <div class="telo">
                     <div class="riadok">
                         <div class="col-7 clear"></div>
                         <div class="col">
-
                             <h5>Monitor</h5>
-
-
                         </div>
                         <div class="col">
-
                             <h5>Operátor</h5>
                         </div>
                     </div>
@@ -89,10 +68,10 @@
                             <div>Suma pracovnikov</div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="suma_pracovnikov_monitor" type="text" value="6"/>
+                            <input class="form-control" name="suma_pracovnikov_monitor"/>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="suma_pracovnikov_operator" type="text" placeholder="4"/>
+                            <input class="form-control" name="suma_pracovnikov_operator"/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -100,10 +79,10 @@
                             <div>PN + Lekár</div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="pn_lekar_monitor" type="text" placeholder="6"/>
+                            <input class="form-control" name="pn_lekar_monitor"/>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="pn_lekar_operator" type="text" placeholder="4"/>
+                            <input class="form-control" name="pn_lekar_operator"/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -111,10 +90,10 @@
                             <div>Dovolenka + NV</div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="dovolenka_nv_monitor" type="text" placeholder="6"/>
+                            <input class="form-control" name="dovolenka_nv_monitor"/>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="dovolenka_nv_operator" type="text" placeholder="4"/>
+                            <input class="form-control" name="dovolenka_nv_operator"/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -122,10 +101,10 @@
                             <div>Suma Iné</div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="ine_monitor" type="text" placeholder="6"/>
+                            <input class="form-control" name="ine_monitor"/>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="ine_operator" type="text" placeholder="4"/>
+                            <input class="form-control" name="ine_operator"/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -133,10 +112,10 @@
                             <div>Školenie</div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="skolenie_monitor" type="text" placeholder="6"/>
+                            <input class="form-control" name="skolenie_monitor"/>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="skolenie_operator" type="text" placeholder="4"/>
+                            <input class="form-control" name="skolenie_operator"/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -144,10 +123,10 @@
                             <div>Požičaný (preč)</div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="pozicany_monitor" type="text" placeholder="6"/>
+                            <input class="form-control" name="pozicany_monitor"/>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="pozicany_operator" type="text" placeholder="4"/>
+                            <input class="form-control" name="pozicany_operator"/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -155,10 +134,10 @@
                             <div>Vypožičaný</div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="vypozicany_monitor" type="text" placeholder="6"/>
+                            <input class="form-control" name="vypozicany_monitor"/>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="vypozicany_operator" type="text" placeholder="4"/>
+                            <input class="form-control" name="vypozicany_operator"/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -166,94 +145,75 @@
                             <div>Nadčas z 2 zmeny</div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="nadcas_2_zmeny_monitor" type="text" placeholder="6"/>
+                            <input class="form-control" name="nadcas_2_zmeny_monitor"/>
                         </div>
                         <div class="col">
-                            <input class="form-control form-control" name="nadcas_2_zmeny_operator" type="text" placeholder="4"/>
+                            <input class="form-control" name="nadcas_2_zmeny_operator"/>
                         </div>
                     </div>
-                    <hr>
-                    <button class="btn btn-outline-primary shadow-sm myBtn" type="submit">Potvrď</button>
+                    <button class="btn btn-outline-primary shadow-sm myBtn mt-3" type="submit">Potvrď</button>
                 </div>
-        </div>
-        {#Treti formular RO           #}
-
-        <div class="col" id="RO">
-            <div class="row karta" id="kartaRO"></div>
-            <div class="telo">
-                <div class="riadok">
-                    <div class="col-12">
-                        <hr>
-                        <div>Zastavenia FAB</div>
-                    </div>
-                    <div class="col-2">
-                        <input class="form-control form-control"  name="zastavenia_int_fab" type="text" placeholder="21"/>
-                    </div>
-                    <div class="col-10">
-                        <input class="form-control form-control" type="text" name="zastavenia_text_fab"
-                               placeholder="Pri striedani nadcasarov bez monitora a RU v linke, 33 post operator QL nehlasil meskajuce kitty a nesikovnost pri vyberani kittov"/>
-                    </div>
-
-                    <div class="col-12">
-                        <div>údržba</div>
-                    </div>
-                    <div class="col-2">
-                        <input class="form-control form-control" type="text" name="udrzba_int" placeholder="2"/>
-                    </div>
-                    <div class="col-10">
-                        <input class="form-control form-control" type="text" name="udrzba_text" name="udrzba_text"
-                               placeholder="Pri striedani nadcasarov bez monitora a RU v linke, 33 post operator QL nehlasil meskajuce kitty a nesikovnost pri vyberani kittov"/>
-                    </div>
-
-                    <div class="col-12">
-                        <div>Logistika</div>
-                    </div>
-                    <div class="col-2">
-                        <input class="form-control form-control" name="logistika_int" type="text" placeholder="0"/>
-                    </div>
-                    <div class="col-10">
-                        <input class="form-control form-control" type="text" name="logistika_text"
-                               placeholder="Pri striedani nadcasarov bez monitora a RU v linke, 33 post operator QL nehlasil meskajuce kitty a nesikovnost pri vyberani kittov"/>
-                    </div>
-
-                    <div class="col-12">
-                        <div>Saturácia</div>
-                    </div>
-                    <div class="col-2">
-                        <input class="form-control form-control" name="saturacia_int" type="text" placeholder="4"/>
-                    </div>
-                    <div class="col-10">
-                        <input class="form-control form-control" type="text" name="saturacia_text"
-                               placeholder="Pri striedani nadcasarov bez monitora a RU v linke, 33 post operator QL nehlasil meskajuce kitty a nesikovnost pri vyberani kittov"/>
-                    </div>
-
-                    <div class="col-12">
-                        <div>Nedostatok</div>
-                    </div>
-                    <div class="col-2">
-                        <input class="form-control form-control" type="text" name="nedostatok_int" placeholder="3"/>
-                    </div>
-                    <div class="col-10">
-                        <input class="form-control form-control" type="text" name="nedostatok_text"
-                               placeholder="Pri striedani nadcasarov bez monitora a RU v linke, 33 post operator QL nehlasil meskajuce kitty a nesikovnost pri vyberani kittov"/>
-
-                    </div>
-                </div>
-
-
-
-                <button class="btn btn-outline-primary shadow-sm myBtn">Potvrď</button>
             </div>
-            </form>
+            <div class="col" id="RO">
+                <div class="row karta" id="kartaRO"></div>
+                <div class="telo">
+                    <div class="riadok" style="margin-top: .4rem;">
+                        <div class="col-12">
+                            <div>Zastavenia FAB</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="zastavenia_int_fab"/>
+                        </div>
+                        <div class="col-10">
+                            <input class="form-control" name="zastavenia_text_fab"/>
+                        </div>
+                        <div class="col-12">
+                            <div>údržba</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="udrzba_int"/>
+                        </div>
+                        <div class="col-10">
+                            <input class="form-control" name="udrzba_text"/>
+                        </div>
+                        <div class="col-12">
+                            <div>Logistika</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="logistika_int"/>
+                        </div>
+                        <div class="col-10">
+                            <input class="form-control" name="logistika_text"/>
+                        </div>
+
+                        <div class="col-12">
+                            <div>Saturácia</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="saturacia_int"/>
+                        </div>
+                        <div class="col-10">
+                            <input class="form-control" name="saturacia_text"/>
+                        </div>
+
+                        <div class="col-12">
+                            <div>Nedostatok</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="nedostatok_int"/>
+                        </div>
+                        <div class="col-10">
+                            <input class="form-control" name="nedostatok_text"/>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-primary shadow-sm myBtn mt-3">Potvrď</button>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/formular.js') }}"></script>
-
-
-
-
+    <script type="text/javascript" src="{{ asset('build/app.js') }}"></script>
 {% endblock %}

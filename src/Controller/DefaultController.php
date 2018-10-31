@@ -1,129 +1,96 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\Zaznam;
-use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\Integer;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController ;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request ;
 use App\Form\ZaznamType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
     /**
      * @Route(path="/", name="index_action")
+     *
+     * @param EntityManagerInterface $em
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function hornatabulka(EntityManagerInterface $em)
     {
-//        /** @var Zaznam $zaznam  */
-//        $zaznam = $em->getRepository(Zaznam::class)->find(1);
+        $current = new \DateTime();
+        $datumy  = [$current->format('d-m-Y')];
 
-       $current = new \DateTime();
-       $datumy = [$current->format('d-m-Y')];
-       for ($i = 9; $i > 0; $i--) {
-           $datumy[] = $current->modify('-1 day')->format('d-m-Y');
-       }
+        for ($i = 9; $i > 0; $i--) {
+            $datumy[] = $current->modify('-1 day')->format('d-m-Y');
+        }
 
 
-
-return $this->render('default/new.html.twig', [
-//            'zaznam' => $zaznam,
-            'datumy' => $datumy,
-            ]);
+        return $this->render('default/new.html.twig', ['datumy' => $datumy]);
     }
 
     /**
-     * @Route(path="/form/{zaznam}", methods={"POST"}, name="form_action")
+     * @Route(path="/zaznamy/{zaznam}", methods={"POST"}, name="update_zaznam_action")
+     *
+     * @param Request                $request
+     * @param Zaznam                 $zaznam
+     * @param EntityManagerInterface $em
+     *
+     * @return JsonResponse
      */
-    public function formAction(Zaznam $zaznam, Request $request, EntityManagerInterface $em)
+    public function updateZaznamAction(Request $request, Zaznam $zaznam, EntityManagerInterface $em)
     {
-        $zaznamData = new Zaznam();
-        $form = $this->createForm(ZaznamType::class, $zaznamData);
+        $form = $this->createForm(ZaznamType::class, $zaznam);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $zaznam->setNadcas($zaznamData->getNadcas());
-            $zaznam->setSumaPracovnikovMonitor($zaznamData->getSumaPracovnikovMonitor());
-            $zaznam->setSumaPracovnikovOperator($zaznamData->getSumaPracovnikovOperator());
-            $zaznam->setPnLekarMonitor($zaznamData->getPnLekarMonitor());
-            $zaznam->setPnLekarOperator($zaznamData->getPnLekarOperator());
-            $zaznam->setDovolenkaNvMonitor($zaznamData->getDovolenkaNvMonitor());
-            $zaznam->setDovolenkaNvOperator($zaznamData->getDovolenkaNvOperator());
-            $zaznam->setIneMonitor($zaznamData->getIneMonitor());
-            $zaznam->setIneOperator($zaznamData->getIneOperator());
-            $zaznam->setSkolenieMonitor($zaznamData->getSkolenieMonitor());
-            $zaznam->setSkolenieOperator($zaznamData->getSkolenieOperator());
-            $zaznam->setPozicanyMonitor($zaznamData->getPozicanyMonitor());
-            $zaznam->setPozicanyOperator($zaznamData->getPozicanyOperator());
-            $zaznam->setVypozicanyMonitor($zaznamData->getVypozicanyMonitor());
-            $zaznam->setVypozicanyOperator($zaznamData->getVypozicanyOperator());
-            $zaznam->setNadcas2ZmenyMonitor($zaznamData->getNadcas2ZmenyMonitor());
-            $zaznam->setNadcas2ZmenyOperator($zaznamData->getNadcas2ZmenyOperator());
-            $zaznam->setZastaveniaIntFab($zaznamData->getZastaveniaIntFab());
-            $zaznam->setZastaveniaTextFab($zaznamData->getZastaveniaTextFab());
-            $zaznam->setUdrzbaInt($zaznamData->getUdrzbaInt());
-            $zaznam->setUdrzbaText($zaznamData->getUdrzbaText());
-            $zaznam->setLogistikaInt($zaznamData->getLogistikaInt());
-            $zaznam->setLogistikaText($zaznamData->getLogistikaText());
-            $zaznam->setSaturaciaInt($zaznamData->getSaturaciaInt());
-            $zaznam->setSaturaciaText($zaznamData->getSaturaciaText());
-            $zaznam->setNedostatokInt($zaznamData->getNedostatokInt());
-            $zaznam->setNedostatokText($zaznamData->getNedostatokText());
-
-
-            $em->persist($zaznam);
             $em->flush();
         }
-
-//        return new Response('Totot je telo', Response::HTTP_BAD_GATEWAY);
 
         return new JsonResponse();
     }
 
     /**
-     * @Route(path="/getData", methods={"POST"}, name="get_data_action")
+     * @Route(path="/zaznamy", methods={"GET"}, name="get_zaznam_action")
      */
-    public function getDataAction(Request $request, EntityManagerInterface $em)
+    public function getZaznamAction(Request $request, EntityManagerInterface $em)
     {
-        $data = $request->request->get('data', null);
-        /**
-         * @var Zaznam $zaznam
-         */
-        $zaznam = $em->getRepository(Zaznam::class)->findOneBy([
-            'den' => new \DateTime($data['den']),
-            'linka'=> $data['linka'],
-            'uep' => $data['uep'],
-            'zmena' => $data['zmena']
-        ]);
+        $den   = $request->get('den', null);
+        $linka = $request->get('linka', null);
+        $uep   = $request->get('uep', null);
+        $zmena = $request->get('zmena', null);
+
+        if (!$den || !$linka || !$uep || !$zmena ) {
+            return new JsonResponse([], Response::HTTP_BAD_REQUEST);
+        }
+
+        $den = new \DateTime($den);
+
+        /** @var Zaznam $zaznam */
+        $zaznam = $em->getRepository(Zaznam::class)->findOneBy(
+            [
+                'den'   => $den,
+                'linka' => $linka,
+                'uep'   => $uep,
+                'zmena' => $zmena
+            ]
+        );
 
         if (empty($zaznam)) {
             $zaznam = new Zaznam();
-            $zaznam->setDen( new \DateTime($data['den']));
-            $zaznam->setLinka($data['linka']);
-            $zaznam->setUep($data['uep']);
-            $zaznam->setZmena($data['zmena']);
+            $zaznam->setDen($den);
+            $zaznam->setLinka($linka);
+            $zaznam->setUep($uep);
+            $zaznam->setZmena($zmena);
 
             $em->persist($zaznam);
             $em->flush();
-
-            return new JsonResponse([
-                'zaznamId' => $zaznam->getId(),
-                'zaznamData' => $zaznam->toArray(),
-            ]);
-        } else {
-            return new JsonResponse([
-                'zaznamId' => $zaznam->getId(),
-                'zaznamData' => $zaznam->toArray(),
-            ]);
         }
+
+        return new JsonResponse(['zaznamId' => $zaznam->getId(), 'zaznamData' => $zaznam->toArray()]);
     }
-
 }
-
-
-
-
-
-
