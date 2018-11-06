@@ -7,65 +7,72 @@
 {% endblock %}
 
 {% block body %}
-    <form id="horna-tab-form" data-zaznam-id="">
+    <form id="horna-tab-form" data-zaznam-id="" autocomplete="off">
         <div class="row" id="navbar">
-            <div class="col" id="den">
-                <select name="den" title="DÁTUM" id="datum" class="selectpicker search-control">
-                    <option selected value="-1"></option>
-                    {% for datum in datumy %}
-                        <option value="{{ datum }}">{{ datum }}</option>
-                    {% endfor %}
-                </select>
+            <div class="col-6 mt-3">
+                <div class="row">
+                    <div class="col-3">
+                        <select id="den" name="den" title="DÁTUM" id="datum" class="selectpicker search-control"
+                                data-width="100%">
+                            {% for datum in datumy %}
+                                <option value="{{ datum }}" {{ loop.first ? 'selected' : '' }}>{{ datum }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <select id="linka_uep" class="selectpicker show-menu-arrow shadow-sm uep search-control"
+                                data-width="100%" title="Linka - Uep" name="uep">
+                            <option selected value="-1"></option>
+                            {% for data in uepSelectData %}
+                                <optgroup label="{{ data[0][0] }}">
+                                    {% for uep in data[0][1] %}
+                                        <option value="{{ uep[0] }}">{{ uep[1] }}</option>
+                                    {% endfor %}
+                                </optgroup>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <select id="zmena" class="selectpicker shadow-sm zmena search-control" data-width="100%"
+                                title="Zmena"
+                                name="zmena" disabled>
+                            <option selected value="-1"></option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input id="nadcas" class="form-control nadcas" title="Nadcas" name="nadcas" placeholder="Nadčas"
+                               disabled/>
+                    </div>
+                </div>
             </div>
-            <div class="col" id="linka">
-                <!--label Linka-->
-                <select class="selectpicker shadow-sm linka search-control" data-width="100%" title="LINKA" name="linka" disabled>
-                    <option selected value="-1"></option>
-                    <option value="HC">HC</option>
-                    <option value="MV">MV</option>
-                </select>
-            </div>
-            <div class="col" id="uep">
-                <select class="selectpicker show-menu-arrow shadow-sm uep search-control" data-width="100%" title="UEP" name="uep"
-                        disabled>
-                    <option selected value="-1"></option>
-                    <option value="HC1">HC1</option>
-                    <option value="HC2">HC2</option>
-                    <option value="HC3">HC3</option>
-                    <option value="HC4">HC4</option>
-                </select>
-            </div>
-            <div class="col" id="zmena">
-                <select class="selectpicker shadow-sm zmena search-control" data-width="100%" title="Zmena" name="zmena" disabled>
-                    <option selected value="-1"></option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-            </div>
-            <div class="col">
-                <input id="nadcas" class="form-control nadcas" title="Nadcas" name="nadcas" placeholder="Nadčas"
-                       disabled/>
+            <div class="col-6 mt-3 text-right">
+                <button class="btn btn-outline-primary shadow-sm myBtn" type="submit" style="width: 20rem;">Potvrď
+                </button>
             </div>
         </div>
 
         <div class="row" id="telo">
             <div class="col" id="Dochadzka">
-                <div class="row karta" id="kartaDochadzka"></div>
+                <div class="row karta" id="kartaDochadzka">
+                    <h1 class="no-selection"><i class="fas fa-user-friends"></i> Dochádzka</h1>
+                </div>
                 <div class="telo">
                     <div class="riadok">
                         <div class="col-7 clear"></div>
                         <div class="col">
-                            <h5>Monitor</h5>
+                            <h5 class="no-selection">Monitor</h5>
                         </div>
                         <div class="col">
-                            <h5>Operátor</h5>
+                            <h5 class="no-selection">Operátor</h5>
                         </div>
                     </div>
                     <div class="riadok">
                         <div class="col-7">
-                            <div>Suma pracovnikov</div>
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Suma pracovnikov</div>
                         </div>
                         <div class="col">
                             <input class="form-control" name="suma_pracovnikov_monitor"/>
@@ -76,7 +83,7 @@
                     </div>
                     <div class="riadok">
                         <div class="col-7">
-                            <div>PN + Lekár</div>
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> PN + Lekár</div>
                         </div>
                         <div class="col">
                             <input class="form-control" name="pn_lekar_monitor"/>
@@ -87,7 +94,7 @@
                     </div>
                     <div class="riadok">
                         <div class="col-7">
-                            <div>Dovolenka + NV</div>
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Dovolenka + NV</div>
                         </div>
                         <div class="col">
                             <input class="form-control" name="dovolenka_nv_monitor"/>
@@ -98,7 +105,7 @@
                     </div>
                     <div class="riadok">
                         <div class="col-7">
-                            <div>Suma Iné</div>
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Suma Iné</div>
                         </div>
                         <div class="col">
                             <input class="form-control" name="ine_monitor"/>
@@ -109,7 +116,7 @@
                     </div>
                     <div class="riadok">
                         <div class="col-7">
-                            <div>Školenie</div>
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Školenie</div>
                         </div>
                         <div class="col">
                             <input class="form-control" name="skolenie_monitor"/>
@@ -120,7 +127,7 @@
                     </div>
                     <div class="riadok">
                         <div class="col-7">
-                            <div>Požičaný (preč)</div>
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Požičaný (preč)</div>
                         </div>
                         <div class="col">
                             <input class="form-control" name="pozicany_monitor"/>
@@ -131,7 +138,7 @@
                     </div>
                     <div class="riadok">
                         <div class="col-7">
-                            <div>Vypožičaný</div>
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Vypožičaný</div>
                         </div>
                         <div class="col">
                             <input class="form-control" name="vypozicany_monitor"/>
@@ -142,72 +149,93 @@
                     </div>
                     <div class="riadok">
                         <div class="col-7">
-                            <div>Nadčas z 2 zmeny</div>
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Nadčas z 2 zmeny</div>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="nadcas_2_zmeny_monitor"/>
+                            <input class="form-control" name="nadcas_druha_zmena_monitor"/>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="nadcas_2_zmeny_operator"/>
+                            <input class="form-control" name="nadcas_druha_zmena_operator"/>
                         </div>
                     </div>
-                    <button class="btn btn-outline-primary shadow-sm myBtn mt-3" type="submit">Potvrď</button>
                 </div>
             </div>
-            <div class="col" id="RO">
-                <div class="row karta" id="kartaRO"></div>
-                <div class="telo">
-                    <div class="riadok" style="margin-top: .4rem;">
-                        <div class="col-12">
-                            <div>Zastavenia FAB</div>
+            <div class="col" id="ro">
+                <div class="row karta" id="kartaRO">
+                    <h1 class="no-selection"><i class="fas fa-tachometer-alt"></i> RO</h1>
+                    <div style="display: inherit; margin-right: 1rem; text-align: center;">
+                        <div class="ro-title-value-item" style="margin-right: .5rem;">
+                            <h6 class="no-selection">Efektivita</h6>
+                            <span id="efektivitaVal" class="ro-title-values" style="color: red;">86,2 %</span>
                         </div>
-                        <div class="col-2">
-                            <input class="form-control" name="zastavenia_int_fab"/>
+                        <div class="ro-title-value-item" style="margin-right: .5rem;">
+                            <h6 class="no-selection">RO</h6>
+                            <span id="roVal" class="ro-title-values">81,8 %</span>
                         </div>
-                        <div class="col-10">
-                            <input class="form-control" name="zastavenia_text_fab"/>
-                        </div>
-                        <div class="col-12">
-                            <div>údržba</div>
-                        </div>
-                        <div class="col-2">
-                            <input class="form-control" name="udrzba_int"/>
-                        </div>
-                        <div class="col-10">
-                            <input class="form-control" name="udrzba_text"/>
-                        </div>
-                        <div class="col-12">
-                            <div>Logistika</div>
-                        </div>
-                        <div class="col-2">
-                            <input class="form-control" name="logistika_int"/>
-                        </div>
-                        <div class="col-10">
-                            <input class="form-control" name="logistika_text"/>
-                        </div>
-
-                        <div class="col-12">
-                            <div>Saturácia</div>
-                        </div>
-                        <div class="col-2">
-                            <input class="form-control" name="saturacia_int"/>
-                        </div>
-                        <div class="col-10">
-                            <input class="form-control" name="saturacia_text"/>
-                        </div>
-
-                        <div class="col-12">
-                            <div>Nedostatok</div>
-                        </div>
-                        <div class="col-2">
-                            <input class="form-control" name="nedostatok_int"/>
-                        </div>
-                        <div class="col-10">
-                            <input class="form-control" name="nedostatok_text"/>
+                        <div class="ro-title-value-item">
+                            <h6 class="no-selection">Non RO</h6>
+                            <span id="nonRoVal" class="ro-title-values">18,2 %</span>
                         </div>
                     </div>
+                </div>
+                <div class="telo" style="justify-content: start; margin-top: 0;">
+                    <div class="row">
+                        <div class="col-4"><i class="fas fa-info-circle"></i> Teoretická výroba</div>
+                        <div class="col-2"><input id="teoreticka-vyroba" class="form-control pull-right" readonly/></div>
+                        <div class="col-4"><i class="fas fa-info-circle"></i> Počet vyrobených</div>
+                        <div class="col-2"><input id="pocet-vyrobenych" class="form-control pull-right" name="pocet_vyrobenych"/></div>
+                    </div>
+                    <div class="riadok" style="margin-top: .4rem;">
+                        <div class="col-12"
+                             style="border-top: 1px solid #c5c5c5; margin-top: .5rem; padding-top: .5rem;">
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Zastavenia FAB</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="zastavenia_fab_pocet"/>
+                        </div>
+                        <div class="col-10">
+                            <textarea class="form-control" name="zastavenia_fab_info" rows="2"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Údržba</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="udrzba_pocet"/>
+                        </div>
+                        <div class="col-10">
+                            <textarea class="form-control" name="udrzba_info" rows="2"></textarea>
+                        </div>
+                        <div class="col-12"
+                             style="border-top: 1px solid #c5c5c5; margin-top: .5rem; padding-top: .5rem;">
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Logistika</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="logistika_pocet"/>
+                        </div>
+                        <div class="col-10">
+                            <textarea class="form-control" name="logistika_info" rows="2"></textarea>
+                        </div>
 
-                    <button class="btn btn-outline-primary shadow-sm myBtn mt-3">Potvrď</button>
+                        <div class="col-12">
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Saturácia</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="saturacia_pocet"/>
+                        </div>
+                        <div class="col-10">
+                            <textarea class="form-control" name="saturacia_info" rows="2"></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="no-selection"><i class="fas fa-info-circle"></i> Nedostatok</div>
+                        </div>
+                        <div class="col-2">
+                            <input class="form-control" name="nedostatok_pocet"/>
+                        </div>
+                        <div class="col-10">
+                            <textarea class="form-control" name="nedostatok_info" rows="2"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

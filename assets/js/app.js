@@ -12,17 +12,15 @@ $(() => {
 
         switch (jElem.attr('name')) {
             case 'den':
-                $('select[name="linka"]').prop('disabled', false);
-                break;
-            case 'linka':
-                $('select[name="uep"]').prop('disabled', false);
+                $('select[name="linka_uep"]').prop('disabled', false);
                 break;
             case 'uep':
                 $('select[name="zmena"]').prop('disabled', false);
                 break;
             case 'zmena':
-                $('input[name="nadcas"]').prop('disabled', false);
+                $('#nadcas').prop('disabled', false);
                 getData();
+                getCiele();
                 break;
             default:
                 break;
@@ -31,11 +29,24 @@ $(() => {
         $('.selectpicker').selectpicker('refresh');
     });
 
+    $('form input').keydown((e) => {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    $('form input').click((e) => {
+        let jElem = $(e.currentTarget);
+
+        jElem.select();
+    });
+
     $('#horna-tab-form').submit(function (e) {
         e.preventDefault();
 
-        var zaznamId = $(e.currentTarget).data('zaznam-id');
-        var formData = new FormData(e.currentTarget);
+        let zaznamId = $(e.currentTarget).data('zaznam-id');
+        let formData = new FormData(e.currentTarget);
 
         $.ajax({
             url: ('/zaznamy/' + zaznamId),
@@ -58,46 +69,48 @@ $(() => {
 
 
     function getData() {
+        let uepId = $('select[name="uep"]').val();
+
         $.get('/zaznamy', {
             den: $('select[name="den"]').val(),
-            linka: $('select[name="linka"]').val(),
-            zmena: $('select[name="zmena"]').val(),
-            uep: $('select[name="uep"]').val()
+            uep: uepId,
+            zmena: $('select[name="zmena"]').val()
         }).then((data) => {
-            $('#horna-tab-form').data('zaznam-id', data.zaznamId);
+            let form = $('#horna-tab-form');
+            form.data('zaznam-id', data.id);
 
-            $('#nadcas').val(data.zaznamData.nadcas);
-            $('input[name="suma_pracovnikov_monitor"]').val(data.zaznamData.suma_pracovnikov_m);
-            $('input[name="suma_pracovnikov_operator"]').val(data.zaznamData.suma_pracovnikov_o);
-            $('input[name="pn_lekar_monitor"]').val(data.zaznamData.pn_lekar_m);
-            $('input[name="pn_lekar_operator"]').val(data.zaznamData.pn_lekar_o);
-            $('input[name="dovolenka_nv_monitor"]').val(data.zaznamData.dovolenka_nv_m);
-            $('input[name="dovolenka_nv_operator"]').val(data.zaznamData.dovolenka_nv_o);
-            $('input[name="ine_monitor"]').val(data.zaznamData.ine_m);
-            $('input[name="ine_operator"]').val(data.zaznamData.ine_o);
-            $('input[name="skolenie_monitor"]').val(data.zaznamData.skolenie_m);
-            $('input[name="skolenie_operator"]').val(data.zaznamData.skolenie_o);
-            $('input[name="pozicany_monitor"]').val(data.zaznamData.pozicany_m);
-            $('input[name="pozicany_operator"]').val(data.zaznamData.pozicany_o);
-            $('input[name="vypozicany_monitor"]').val(data.zaznamData.vypozicany_m);
-            $('input[name="vypozicany_operator"]').val(data.zaznamData.vypozicany_o);
-            $('input[name="nadcas_2_zmeny_monitor"]').val(data.zaznamData.nadcas_2_zmeny_m);
-            $('input[name="nadcas_2_zmeny_operator"]').val(data.zaznamData.nadcas_2_zmeny_o);
-            $('input[name="zastavenia_text_fab"]').val(data.zaznamData.zastavenia_text_f);
-            $('input[name="zastavenia_int_fab"]').val(data.zaznamData.zastavenia_int_f);
-            $('input[name="udrzba_text"]').val(data.zaznamData.udrzba_t);
-            $('input[name="udrzba_int"]').val(data.zaznamData.udrzba_i);
-            $('input[name="logistika_text"]').val(data.zaznamData.logistika_t);
-            $('input[name="logistika_int"]').val(data.zaznamData.logistika_i);
-            $('input[name="saturacia_text"]').val(data.zaznamData.saturacia_t);
-            $('input[name="saturacia_int"]').val(data.zaznamData.saturacia_i);
-            $('input[name="nedostatok_text"]').val(data.zaznamData.nedostatok_t);
-            $('input[name="nedostatok_int"]').val(data.zaznamData.nedostatok_i);
+            $.each(data, function (key, value) {
+                let ctrl = $('input[name=' + key + ']', form);
+
+                if (ctrl !== undefined) {
+                    ctrl.val(value);
+                }
+            });
         }).fail(() => {
             swal({
                 type: 'error',
                 title: 'Chyba pri sťahovaní záznamu!'
             });
         });
+    }
+
+    function getCiele() {
+        let uepId = $('select[name="uep"]').val();
+
+        $.get(`/ciel/${uepId}`)
+            .then((data) => {
+                let roCard = $('#ro');
+
+                roCard.data('ro-ciel', data['ciel_ro']);
+                roCard.data('efektivita-ciel', data['ciel_efektivita']);
+
+                $('#teoreticka-vyroba').val(data['ciel_teoreticka_vyroba']);
+            })
+            .fail(() => {
+                swal({
+                    type: 'error',
+                    title: 'Chyba pri sťahovaní cieľov!'
+                });
+            });
     }
 });

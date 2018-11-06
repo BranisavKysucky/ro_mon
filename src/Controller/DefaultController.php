@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Linka;
+use App\Entity\Uep;
 use App\Entity\Zaznam;
 use App\Form\ZaznamType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,8 +35,25 @@ class DefaultController extends AbstractController
             $datumy[] = $current->modify('-1 day')->format('d-m-Y');
         }
 
+        /** @var Linka[] $linky */
+        $linky        = $em->getRepository(Linka::class)->findAll();
+        $uepSelectArr = [];
 
-        return $this->render('default/new.html.twig', ['datumy' => $datumy]);
+        foreach ($linky as $linka) {
+            $uepSelectArr[] = [
+                [
+                    $linka->getNazov(),
+                    array_map(
+                        function (Uep $uep) {
+                            return [$uep->getId(), $uep->getNazov()];
+                        },
+                        $linka->getUeps()->toArray()
+                    ),
+                ],
+            ];
+        }
+
+        return $this->render('default/new.html.twig', ['datumy' => $datumy, 'uepSelectData' => $uepSelectArr]);
     }
 
     /**
@@ -57,40 +80,89 @@ class DefaultController extends AbstractController
     /**
      * @Route(path="/zaznamy", methods={"GET"}, name="get_zaznam_action")
      */
-    public function getZaznamAction(Request $request, EntityManagerInterface $em)
+    public function getZaznamAction(Request $request, EntityManagerInterface $em, SerializerInterface $serializer)
     {
         $den   = $request->get('den', null);
-        $linka = $request->get('linka', null);
-        $uep   = $request->get('uep', null);
+        $uepId = $request->get('uep', null);
         $zmena = $request->get('zmena', null);
 
-        if (!$den || !$linka || !$uep || !$zmena ) {
+        if (!$den || !$uepId || !$zmena) {
             return new JsonResponse([], Response::HTTP_BAD_REQUEST);
         }
 
         $den = new \DateTime($den);
+        $uep = $em->getRepository(Uep::class)->find($uepId);
 
         /** @var Zaznam $zaznam */
         $zaznam = $em->getRepository(Zaznam::class)->findOneBy(
             [
                 'den'   => $den,
-                'linka' => $linka,
                 'uep'   => $uep,
-                'zmena' => $zmena
+                'zmena' => $zmena,
             ]
         );
 
         if (empty($zaznam)) {
             $zaznam = new Zaznam();
-            $zaznam->setDen($den);
-            $zaznam->setLinka($linka);
-            $zaznam->setUep($uep);
-            $zaznam->setZmena($zmena);
+            $zaznam->setDen($den)
+                   ->setUep($uep)
+                   ->setZmena($zmena);
 
             $em->persist($zaznam);
             $em->flush();
         }
 
-        return new JsonResponse(['zaznamId' => $zaznam->getId(), 'zaznamData' => $zaznam->toArray()]);
+        $data = $serializer->serialize($zaznam, 'json', SerializationContext::create()->setGroups(['zaznam']));
+
+        return new Response($data, 200, ['Content-Type' => 'application/json']);
+    }
+
+    /**
+     * @Route(path="/ciel/{uep}", methods={"GET"}, name="get_ciel_action")
+     *
+     * @param Uep                    $uep
+     * @param EntityManagerInterface $em
+     * @param SerializerInterface    $serializer
+     *
+     * @return Response
+     */
+    public function getCielAction(Uep $uep, EntityManagerInterface $em, SerializerInterface $serializer)
+    {
+        try {
+            $linka = $uep->getLinka();
+            $ciel  = $em->createQueryBuilder()->select('c')
+                        ->from('App:Ciel', 'c')
+                        ->where('c.linka = ?1')
+                        ->orderBy('c.platnostOd', 'DESC')
+                        ->setMaxResults(1)
+                        ->setParameter(1, $linka)
+                        ->getQuery()
+                        ->getSingleResult();
+
+            $data = $serializer->serialize($ciel, 'json', SerializationContext::create()->setGroups(['zaznam']));
+
+            return new Response($data, 200, ['Content-Type' => 'application/json']);
+        } catch (NoResultException $e) {
+            return new JsonResponse(['msg' => 'Nenájdený cieľ pre danú linku!'], Response::HTTP_BAD_REQUEST);
+        } catch (NonUniqueResultException $e) {
+            return new JsonResponse(['msg' => 'Nájdených viacero cieľov pre danú linku!'], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    /**
+     * @Route(path="/test", methods={"GET"}, name="test_action")
+     *
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
+    public function testAction(EntityManagerInterface $em, SerializerInterface $serializer)
+    {
+        /** @var Zaznam $zaznam */
+        $zaznam = $em->getRepository(Zaznam::class)->find(1);
+
+        $json = $serializer->serialize($zaznam, 'json', SerializationContext::create()->setGroups(['zaznam']));
+
+        return new Response($json, 200, ['Content-Type' => 'application/json']);
     }
 }

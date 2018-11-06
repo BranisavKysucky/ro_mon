@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="zaznam")
+ *
  */
 class Zaznam
 {
@@ -14,243 +16,301 @@ class Zaznam
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
     private $id;
 
     /**
-     * @var \DateTime
+     * @ORM\Column(type="date")
      *
-     * @ORM\Column(type="datetime")
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var \DateTime
      */
     private $den;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $linka;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=1)
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var string
      */
     private $zmena;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
     private $nadcas = 0;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Uep")
+     * @ORM\JoinColumn(name="uep_id", referencedColumnName="id")
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var Uep
      */
     private $uep;
 
-
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $suma_pracovnikov_monitor = 0;
+    private $pocetVyrobenych = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $suma_pracovnikov_operator = 0;
+    private $sumaPracovnikovMonitor = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $pn_lekar_monitor = 0;
+    private $sumaPracovnikovOperator = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $pn_lekar_operator = 0;
+    private $pnLekarMonitor = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $dovolenka_nv_monitor = 0;
+    private $pnLekarOperator = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $dovolenka_nv_operator = 0;
+    private $dovolenkaNvMonitor = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $ine_monitor = 0;
+    private $dovolenkaNvOperator = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $ine_operator = 0;
+    private $ineMonitor = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $skolenie_monitor = 0;
+    private $ineOperator = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $skolenie_operator = 0;
+    private $skolenieMonitor = 0;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $pozicany_monitor = 0;
+    private $skolenieOperator = 0;
 
     /**
-     * @var integer
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
+     */
+    private $pozicanyMonitor = 0;
+
+    /**
      * @ORM\Column(type="integer",options={"unsigned":true, "default":0})
-     */
-    private $pozicany_operator = 0;
-
-    /**
-     * @var integer
      *
-     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
-     */
-    private $vypozicany_monitor = 0;
-
-    /**
-     * @var integer
+     * @Serializer\Groups({"zaznam"})
      *
-     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
-     */
-    private $vypozicany_operator = 0;
-
-    /**
      * @var integer
-     *
-     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $nadcas_2_zmeny_monitor = 0;
+    private $pozicanyOperator = 0;
 
     /**
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
      * @var integer
-     *
-     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $nadcas_2_zmeny_operator = 0;
+    private $vypozicanyMonitor = 0;
 
     /**
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
+     */
+    private $vypozicanyOperator = 0;
+
+    /**
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
+     */
+    private $nadcasDruhaZmenaMonitor = 0;
+
+    /**
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
+     */
+    private $nadcasDruhaZmenaOperator = 0;
+
+    /**
+     * @ORM\Column(type="text", options={"default":""})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
      * @var string
-     *
-     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $zastavenia_text_fab = "";
+    private $zastaveniaFabInfo = "";
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $zastavenia_int_fab = 0;
+    private $zastaveniaFabPocet = 0;
 
     /**
+     * @ORM\Column(type="text", options={"default":""})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
      * @var string
-     *
-     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $udrzba_text = "";
+    private $udrzbaInfo = "";
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $udrzba_int = 0;
+    private $udrzbaPocet = 0;
 
     /**
+     * @ORM\Column(type="text", options={"default":""})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
      * @var string
-     *
-     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $logistika_text = "";
+    private $logistikaInfo = "";
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $logistika_int = 0;
+    private $logistikaPocet = 0;
 
     /**
+     * @ORM\Column(type="text", options={"default":""})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
      * @var string
-     *
-     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $saturacia_text = "";
+    private $saturaciaInfo = "";
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $saturacia_int = 0;
+    private $saturaciaPocet = 0;
 
     /**
+     * @ORM\Column(type="text", options={"default":""})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
      * @var string
-     *
-     * @ORM\Column(type="string", length=255, options={"default":""})
      */
-    private $nedostatok_text = "";
+    private $nedostatokInfo = "";
 
     /**
-     * @var integer
-     *
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
      */
-    private $nedostatok_int = 0;
+    private $nedostatokPocet = 0;
 
     /**
      * Get id
      *
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * Set id
-     *
-     * @param mixed $id
-     *
-     * @return Zaznam
-     */
-    public function setId($id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**
@@ -272,31 +332,7 @@ class Zaznam
      */
     public function setDen(\DateTime $den): self
     {
-        $this->den = $den;
-
-        return $this;
-    }
-
-    /**
-     * Get linka
-     *
-     * @return mixed
-     */
-    public function getLinka()
-    {
-        return $this->linka;
-    }
-
-    /**
-     * Set linka
-     *
-     * @param mixed $linka
-     *
-     * @return Zaznam
-     */
-    public function setLinka($linka): self
-    {
-        $this->linka = $linka;
+        $this->den = new \DateTime($den->format('Y-m-d'));
 
         return $this;
     }
@@ -304,9 +340,9 @@ class Zaznam
     /**
      * Get zmena
      *
-     * @return mixed
+     * @return string
      */
-    public function getZmena()
+    public function getZmena(): string
     {
         return $this->zmena;
     }
@@ -314,11 +350,11 @@ class Zaznam
     /**
      * Set zmena
      *
-     * @param mixed $zmena
+     * @param string $zmena
      *
      * @return Zaznam
      */
-    public function setZmena($zmena): self
+    public function setZmena(string $zmena): self
     {
         $this->zmena = $zmena;
 
@@ -352,9 +388,9 @@ class Zaznam
     /**
      * Get uep
      *
-     * @return mixed
+     * @return Uep
      */
-    public function getUep()
+    public function getUep(): Uep
     {
         return $this->uep;
     }
@@ -362,11 +398,11 @@ class Zaznam
     /**
      * Set uep
      *
-     * @param mixed $uep
+     * @param Uep $uep
      *
      * @return Zaznam
      */
-    public function setUep($uep): self
+    public function setUep(Uep $uep): self
     {
         $this->uep = $uep;
 
@@ -374,662 +410,650 @@ class Zaznam
     }
 
     /**
-     * Get suma_pracovnikov_monitor
+     * Get pocetVyrobenych
+     *
+     * @return int
+     */
+    public function getPocetVyrobenych(): int
+    {
+        return $this->pocetVyrobenych;
+    }
+
+    /**
+     * Set pocetVyrobenych
+     *
+     * @param int $pocetVyrobenych
+     *
+     * @return Zaznam
+     */
+    public function setPocetVyrobenych(int $pocetVyrobenych): self
+    {
+        $this->pocetVyrobenych = $pocetVyrobenych;
+
+        return $this;
+    }
+
+    /**
+     * Get sumaPracovnikovMonitor
      *
      * @return int
      */
     public function getSumaPracovnikovMonitor(): int
     {
-        return $this->suma_pracovnikov_monitor;
+        return $this->sumaPracovnikovMonitor;
     }
 
     /**
-     * Set suma_pracovnikov_monitor
+     * Set sumaPracovnikovMonitor
      *
-     * @param int $suma_pracovnikov_monitor
+     * @param int $sumaPracovnikovMonitor
      *
      * @return Zaznam
      */
-    public function setSumaPracovnikovMonitor(int $suma_pracovnikov_monitor): self
+    public function setSumaPracovnikovMonitor(int $sumaPracovnikovMonitor): self
     {
-        $this->suma_pracovnikov_monitor = $suma_pracovnikov_monitor;
+        $this->sumaPracovnikovMonitor = $sumaPracovnikovMonitor;
 
         return $this;
     }
 
     /**
-     * Get suma_pracovnikov_operator
+     * Get sumaPracovnikovOperator
      *
      * @return int
      */
     public function getSumaPracovnikovOperator(): int
     {
-        return $this->suma_pracovnikov_operator;
+        return $this->sumaPracovnikovOperator;
     }
 
     /**
-     * Set suma_pracovnikov_operator
+     * Set sumaPracovnikovOperator
      *
-     * @param int $suma_pracovnikov_operator
+     * @param int $sumaPracovnikovOperator
      *
      * @return Zaznam
      */
-    public function setSumaPracovnikovOperator(int $suma_pracovnikov_operator): self
+    public function setSumaPracovnikovOperator(int $sumaPracovnikovOperator): self
     {
-        $this->suma_pracovnikov_operator = $suma_pracovnikov_operator;
+        $this->sumaPracovnikovOperator = $sumaPracovnikovOperator;
 
         return $this;
     }
 
     /**
-     * Get pn_lekar_monitor
+     * Get pnLekarMonitor
      *
      * @return int
      */
     public function getPnLekarMonitor(): int
     {
-        return $this->pn_lekar_monitor;
+        return $this->pnLekarMonitor;
     }
 
     /**
-     * Set pn_lekar_monitor
+     * Set pnLekarMonitor
      *
-     * @param int $pn_lekar_monitor
+     * @param int $pnLekarMonitor
      *
      * @return Zaznam
      */
-    public function setPnLekarMonitor(int $pn_lekar_monitor): self
+    public function setPnLekarMonitor(int $pnLekarMonitor): self
     {
-        $this->pn_lekar_monitor = $pn_lekar_monitor;
+        $this->pnLekarMonitor = $pnLekarMonitor;
 
         return $this;
     }
 
     /**
-     * Get pn_lekar_operator
+     * Get pnLekarOperator
      *
      * @return int
      */
     public function getPnLekarOperator(): int
     {
-        return $this->pn_lekar_operator;
+        return $this->pnLekarOperator;
     }
 
     /**
-     * Set pn_lekar_operator
+     * Set pnLekarOperator
      *
-     * @param int $pn_lekar_operator
+     * @param int $pnLekarOperator
      *
      * @return Zaznam
      */
-    public function setPnLekarOperator(int $pn_lekar_operator): self
+    public function setPnLekarOperator(int $pnLekarOperator): self
     {
-        $this->pn_lekar_operator = $pn_lekar_operator;
+        $this->pnLekarOperator = $pnLekarOperator;
 
         return $this;
     }
 
     /**
-     * Get dovolenka_nv_monitor
+     * Get dovolenkaNvMonitor
      *
      * @return int
      */
     public function getDovolenkaNvMonitor(): int
     {
-        return $this->dovolenka_nv_monitor;
+        return $this->dovolenkaNvMonitor;
     }
 
     /**
-     * Set dovolenka_nv_monitor
+     * Set dovolenkaNvMonitor
      *
-     * @param int $dovolenka_nv_monitor
+     * @param int $dovolenkaNvMonitor
      *
      * @return Zaznam
      */
-    public function setDovolenkaNvMonitor(int $dovolenka_nv_monitor): self
+    public function setDovolenkaNvMonitor(int $dovolenkaNvMonitor): self
     {
-        $this->dovolenka_nv_monitor = $dovolenka_nv_monitor;
+        $this->dovolenkaNvMonitor = $dovolenkaNvMonitor;
 
         return $this;
     }
 
     /**
-     * Get dovolenka_nv_operator
+     * Get dovolenkaNvOperator
      *
      * @return int
      */
     public function getDovolenkaNvOperator(): int
     {
-        return $this->dovolenka_nv_operator;
+        return $this->dovolenkaNvOperator;
     }
 
     /**
-     * Set dovolenka_nv_operator
+     * Set dovolenkaNvOperator
      *
-     * @param int $dovolenka_nv_operator
+     * @param int $dovolenkaNvOperator
      *
      * @return Zaznam
      */
-    public function setDovolenkaNvOperator(int $dovolenka_nv_operator): self
+    public function setDovolenkaNvOperator(int $dovolenkaNvOperator): self
     {
-        $this->dovolenka_nv_operator = $dovolenka_nv_operator;
+        $this->dovolenkaNvOperator = $dovolenkaNvOperator;
 
         return $this;
     }
 
     /**
-     * Get ine_monitor
+     * Get ineMonitor
      *
      * @return int
      */
     public function getIneMonitor(): int
     {
-        return $this->ine_monitor;
+        return $this->ineMonitor;
     }
 
     /**
-     * Set ine_monitor
+     * Set ineMonitor
      *
-     * @param int $ine_monitor
+     * @param int $ineMonitor
      *
      * @return Zaznam
      */
-    public function setIneMonitor(int $ine_monitor): self
+    public function setIneMonitor(int $ineMonitor): self
     {
-        $this->ine_monitor = $ine_monitor;
+        $this->ineMonitor = $ineMonitor;
 
         return $this;
     }
 
     /**
-     * Get ine_operator
+     * Get ineOperator
      *
      * @return int
      */
     public function getIneOperator(): int
     {
-        return $this->ine_operator;
+        return $this->ineOperator;
     }
 
     /**
-     * Set ine_operator
+     * Set ineOperator
      *
-     * @param int $ine_operator
+     * @param int $ineOperator
      *
      * @return Zaznam
      */
-    public function setIneOperator(int $ine_operator): self
+    public function setIneOperator(int $ineOperator): self
     {
-        $this->ine_operator = $ine_operator;
+        $this->ineOperator = $ineOperator;
 
         return $this;
     }
 
     /**
-     * Get skolenie_monitor
+     * Get skolenieMonitor
      *
      * @return int
      */
     public function getSkolenieMonitor(): int
     {
-        return $this->skolenie_monitor;
+        return $this->skolenieMonitor;
     }
 
     /**
-     * Set skolenie_monitor
+     * Set skolenieMonitor
      *
-     * @param int $skolenie_monitor
+     * @param int $skolenieMonitor
      *
      * @return Zaznam
      */
-    public function setSkolenieMonitor(int $skolenie_monitor): self
+    public function setSkolenieMonitor(int $skolenieMonitor): self
     {
-        $this->skolenie_monitor = $skolenie_monitor;
+        $this->skolenieMonitor = $skolenieMonitor;
 
         return $this;
     }
 
     /**
-     * Get skolenie_operator
+     * Get skolenieOperator
      *
      * @return int
      */
     public function getSkolenieOperator(): int
     {
-        return $this->skolenie_operator;
+        return $this->skolenieOperator;
     }
 
     /**
-     * Set skolenie_operator
+     * Set skolenieOperator
      *
-     * @param int $skolenie_operator
+     * @param int $skolenieOperator
      *
      * @return Zaznam
      */
-    public function setSkolenieOperator(int $skolenie_operator): self
+    public function setSkolenieOperator(int $skolenieOperator): self
     {
-        $this->skolenie_operator = $skolenie_operator;
+        $this->skolenieOperator = $skolenieOperator;
 
         return $this;
     }
 
     /**
-     * Get pozicany_monitor
+     * Get pozicanyMonitor
      *
      * @return int
      */
     public function getPozicanyMonitor(): int
     {
-        return $this->pozicany_monitor;
+        return $this->pozicanyMonitor;
     }
 
     /**
-     * Set pozicany_monitor
+     * Set pozicanyMonitor
      *
-     * @param int $pozicany_monitor
+     * @param int $pozicanyMonitor
      *
      * @return Zaznam
      */
-    public function setPozicanyMonitor(int $pozicany_monitor): self
+    public function setPozicanyMonitor(int $pozicanyMonitor): self
     {
-        $this->pozicany_monitor = $pozicany_monitor;
+        $this->pozicanyMonitor = $pozicanyMonitor;
 
         return $this;
     }
 
     /**
-     * Get pozicany_operator
+     * Get pozicanyOperator
      *
      * @return int
      */
     public function getPozicanyOperator(): int
     {
-        return $this->pozicany_operator;
+        return $this->pozicanyOperator;
     }
 
     /**
-     * Set pozicany_operator
+     * Set pozicanyOperator
      *
-     * @param int $pozicany_operator
+     * @param int $pozicanyOperator
      *
      * @return Zaznam
      */
-    public function setPozicanyOperator(int $pozicany_operator): self
+    public function setPozicanyOperator(int $pozicanyOperator): self
     {
-        $this->pozicany_operator = $pozicany_operator;
+        $this->pozicanyOperator = $pozicanyOperator;
 
         return $this;
     }
 
     /**
-     * Get vypozicany_monitor
+     * Get vypozicanyMonitor
      *
      * @return int
      */
     public function getVypozicanyMonitor(): int
     {
-        return $this->vypozicany_monitor;
+        return $this->vypozicanyMonitor;
     }
 
     /**
-     * Set vypozicany_monitor
+     * Set vypozicanyMonitor
      *
-     * @param int $vypozicany_monitor
+     * @param int $vypozicanyMonitor
      *
      * @return Zaznam
      */
-    public function setVypozicanyMonitor(int $vypozicany_monitor): self
+    public function setVypozicanyMonitor(int $vypozicanyMonitor): self
     {
-        $this->vypozicany_monitor = $vypozicany_monitor;
+        $this->vypozicanyMonitor = $vypozicanyMonitor;
 
         return $this;
     }
 
     /**
-     * Get vypozicany_operator
+     * Get vypozicanyOperator
      *
      * @return int
      */
     public function getVypozicanyOperator(): int
     {
-        return $this->vypozicany_operator;
+        return $this->vypozicanyOperator;
     }
 
     /**
-     * Set vypozicany_operator
+     * Set vypozicanyOperator
      *
-     * @param int $vypozicany_operator
+     * @param int $vypozicanyOperator
      *
      * @return Zaznam
      */
-    public function setVypozicanyOperator(int $vypozicany_operator): self
+    public function setVypozicanyOperator(int $vypozicanyOperator): self
     {
-        $this->vypozicany_operator = $vypozicany_operator;
+        $this->vypozicanyOperator = $vypozicanyOperator;
 
         return $this;
     }
 
     /**
-     * Get nadcas_2_zmeny_monitor
+     * Get nadcasDruhaZmenaMonitor
      *
      * @return int
      */
-    public function getNadcas2ZmenyMonitor(): int
+    public function getNadcasDruhaZmenaMonitor(): int
     {
-        return $this->nadcas_2_zmeny_monitor;
+        return $this->nadcasDruhaZmenaMonitor;
     }
 
     /**
-     * Set nadcas_2_zmeny_monitor
+     * Set nadcasDruhaZmenaMonitor
      *
-     * @param int $nadcas_2_zmeny_monitor
+     * @param int $nadcasDruhaZmenaMonitor
      *
      * @return Zaznam
      */
-    public function setNadcas2ZmenyMonitor(int $nadcas_2_zmeny_monitor): self
+    public function setNadcasDruhaZmenaMonitor(int $nadcasDruhaZmenaMonitor): self
     {
-        $this->nadcas_2_zmeny_monitor = $nadcas_2_zmeny_monitor;
+        $this->nadcasDruhaZmenaMonitor = $nadcasDruhaZmenaMonitor;
 
         return $this;
     }
 
     /**
-     * Get nadcas_2_zmeny_operator
+     * Get nadcasDruhaZmenaOperator
      *
      * @return int
      */
-    public function getNadcas2ZmenyOperator(): int
+    public function getNadcasDruhaZmenaOperator(): int
     {
-        return $this->nadcas_2_zmeny_operator;
+        return $this->nadcasDruhaZmenaOperator;
     }
 
     /**
-     * Set nadcas_2_zmeny_operator
+     * Set nadcasDruhaZmenaOperator
      *
-     * @param int $nadcas_2_zmeny_operator
+     * @param int $nadcasDruhaZmenaOperator
      *
      * @return Zaznam
      */
-    public function setNadcas2ZmenyOperator(int $nadcas_2_zmeny_operator): self
+    public function setNadcasDruhaZmenaOperator(int $nadcasDruhaZmenaOperator): self
     {
-        $this->nadcas_2_zmeny_operator = $nadcas_2_zmeny_operator;
+        $this->nadcasDruhaZmenaOperator = $nadcasDruhaZmenaOperator;
 
         return $this;
     }
 
     /**
-     * Get zastavenia_text_fab
+     * Get zastaveniaFabInfo
      *
      * @return string
      */
-    public function getZastaveniaTextFab(): string
+    public function getZastaveniaFabInfo(): string
     {
-        return $this->zastavenia_text_fab;
+        return $this->zastaveniaFabInfo;
     }
 
     /**
-     * Set zastavenia_text_fab
+     * Set zastaveniaFabInfo
      *
-     * @param string $zastavenia_text_fab
+     * @param string $zastaveniaFabInfo
      *
      * @return Zaznam
      */
-    public function setZastaveniaTextFab(string $zastavenia_text_fab): self
+    public function setZastaveniaFabInfo(string $zastaveniaFabInfo): self
     {
-        $this->zastavenia_text_fab = $zastavenia_text_fab;
+        $this->zastaveniaFabInfo = $zastaveniaFabInfo;
 
         return $this;
     }
 
     /**
-     * Get zastavenia_int_fab
+     * Get zastaveniaFabPocet
      *
      * @return int
      */
-    public function getZastaveniaIntFab(): int
+    public function getZastaveniaFabPocet(): int
     {
-        return $this->zastavenia_int_fab;
+        return $this->zastaveniaFabPocet;
     }
 
     /**
-     * Set zastavenia_int_fab
+     * Set zastaveniaFabPocet
      *
-     * @param int $zastavenia_int_fab
+     * @param int $zastaveniaFabPocet
      *
      * @return Zaznam
      */
-    public function setZastaveniaIntFab(int $zastavenia_int_fab): self
+    public function setZastaveniaFabPocet(int $zastaveniaFabPocet): self
     {
-        $this->zastavenia_int_fab = $zastavenia_int_fab;
+        $this->zastaveniaFabPocet = $zastaveniaFabPocet;
 
         return $this;
     }
 
     /**
-     * Get udrzba_text
+     * Get udrzbaInfo
      *
      * @return string
      */
-    public function getUdrzbaText(): string
+    public function getUdrzbaInfo(): string
     {
-        return $this->udrzba_text;
+        return $this->udrzbaInfo;
     }
 
     /**
-     * Set udrzba_text
+     * Set udrzbaInfo
      *
-     * @param string $udrzba_text
+     * @param string $udrzbaInfo
      *
      * @return Zaznam
      */
-    public function setUdrzbaText(string $udrzba_text): self
+    public function setUdrzbaInfo(string $udrzbaInfo): self
     {
-        $this->udrzba_text = $udrzba_text;
+        $this->udrzbaInfo = $udrzbaInfo;
 
         return $this;
     }
 
     /**
-     * Get udrzba_int
+     * Get udrzbaPocet
      *
      * @return int
      */
-    public function getUdrzbaInt(): int
+    public function getUdrzbaPocet(): int
     {
-        return $this->udrzba_int;
+        return $this->udrzbaPocet;
     }
 
     /**
-     * Set udrzba_int
+     * Set udrzbaPocet
      *
-     * @param int $udrzba_int
+     * @param int $udrzbaPocet
      *
      * @return Zaznam
      */
-    public function setUdrzbaInt(int $udrzba_int): self
+    public function setUdrzbaPocet(int $udrzbaPocet): self
     {
-        $this->udrzba_int = $udrzba_int;
+        $this->udrzbaPocet = $udrzbaPocet;
 
         return $this;
     }
 
     /**
-     * Get logistika_text
+     * Get logistikaInfo
      *
      * @return string
      */
-    public function getLogistikaText(): string
+    public function getLogistikaInfo(): string
     {
-        return $this->logistika_text;
+        return $this->logistikaInfo;
     }
 
     /**
-     * Set logistika_text
+     * Set logistikaInfo
      *
-     * @param string $logistika_text
+     * @param string $logistikaInfo
      *
      * @return Zaznam
      */
-    public function setLogistikaText(string $logistika_text): self
+    public function setLogistikaInfo(string $logistikaInfo): self
     {
-        $this->logistika_text = $logistika_text;
+        $this->logistikaInfo = $logistikaInfo;
 
         return $this;
     }
 
     /**
-     * Get logistika_int
+     * Get logistikaPocet
      *
      * @return int
      */
-    public function getLogistikaInt(): int
+    public function getLogistikaPocet(): int
     {
-        return $this->logistika_int;
+        return $this->logistikaPocet;
     }
 
     /**
-     * Set logistika_int
+     * Set logistikaPocet
      *
-     * @param int $logistika_int
+     * @param int $logistikaPocet
      *
      * @return Zaznam
      */
-    public function setLogistikaInt(int $logistika_int): self
+    public function setLogistikaPocet(int $logistikaPocet): self
     {
-        $this->logistika_int = $logistika_int;
+        $this->logistikaPocet = $logistikaPocet;
 
         return $this;
     }
 
     /**
-     * Get saturacia_text
+     * Get saturaciaInfo
      *
      * @return string
      */
-    public function getSaturaciaText(): string
+    public function getSaturaciaInfo(): string
     {
-        return $this->saturacia_text;
+        return $this->saturaciaInfo;
     }
 
     /**
-     * Set saturacia_text
+     * Set saturaciaInfo
      *
-     * @param string $saturacia_text
+     * @param string $saturaciaInfo
      *
      * @return Zaznam
      */
-    public function setSaturaciaText(string $saturacia_text): self
+    public function setSaturaciaInfo(string $saturaciaInfo): self
     {
-        $this->saturacia_text = $saturacia_text;
+        $this->saturaciaInfo = $saturaciaInfo;
 
         return $this;
     }
 
     /**
-     * Get saturacia_int
+     * Get saturaciaPocet
      *
      * @return int
      */
-    public function getSaturaciaInt(): int
+    public function getSaturaciaPocet(): int
     {
-        return $this->saturacia_int;
+        return $this->saturaciaPocet;
     }
 
     /**
-     * Set saturacia_int
+     * Set saturaciaPocet
      *
-     * @param int $saturacia_int
+     * @param int $saturaciaPocet
      *
      * @return Zaznam
      */
-    public function setSaturaciaInt(int $saturacia_int): self
+    public function setSaturaciaPocet(int $saturaciaPocet): self
     {
-        $this->saturacia_int = $saturacia_int;
+        $this->saturaciaPocet = $saturaciaPocet;
 
         return $this;
     }
 
     /**
-     * Get nedostatok_text
+     * Get nedostatokInfo
      *
      * @return string
      */
-    public function getNedostatokText(): string
+    public function getNedostatokInfo(): string
     {
-        return $this->nedostatok_text;
+        return $this->nedostatokInfo;
     }
 
     /**
-     * Set nedostatok_text
+     * Set nedostatokInfo
      *
-     * @param string $nedostatok_text
+     * @param string $nedostatokInfo
      *
      * @return Zaznam
      */
-    public function setNedostatokText(string $nedostatok_text): self
+    public function setNedostatokInfo(string $nedostatokInfo): self
     {
-        $this->nedostatok_text = $nedostatok_text;
+        $this->nedostatokInfo = $nedostatokInfo;
 
         return $this;
     }
 
     /**
-     * Get nedostatok_int
+     * Get nedostatokPocet
      *
      * @return int
      */
-    public function getNedostatokInt(): int
+    public function getNedostatokPocet(): int
     {
-        return $this->nedostatok_int;
+        return $this->nedostatokPocet;
     }
 
     /**
-     * Set nedostatok_int
+     * Set nedostatokPocet
      *
-     * @param int $nedostatok_int
+     * @param int $nedostatokPocet
      *
      * @return Zaznam
      */
-    public function setNedostatokInt(int $nedostatok_int): self
+    public function setNedostatokPocet(int $nedostatokPocet): self
     {
-        $this->nedostatok_int = $nedostatok_int;
+        $this->nedostatokPocet = $nedostatokPocet;
 
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return [
-            'nadcas'             => $this->nadcas,
-            'suma_pracovnikov_m' => $this->suma_pracovnikov_monitor,
-            'suma_pracovnikov_o' => $this->suma_pracovnikov_operator,
-            'pn_lekar_m'         => $this->pn_lekar_monitor,
-            'pn_lekar_o'         => $this->pn_lekar_operator,
-            'dovolenka_nv_m'     => $this->dovolenka_nv_monitor,
-            'dovolenka_nv_o'     => $this->dovolenka_nv_operator,
-            'ine_m'              => $this->ine_monitor,
-            'ine_o'              => $this->ine_operator,
-            'skolenie_m'         => $this->skolenie_monitor,
-            'skolenie_o'         => $this->skolenie_operator,
-            'pozicany_m'         => $this->pozicany_monitor,
-            'pozicany_o'         => $this->pozicany_operator,
-            'vypozicany_m'       => $this->vypozicany_monitor,
-            'vypozicany_o'       => $this->vypozicany_operator,
-            'nadcas_2_zmeny_m'   => $this->nadcas_2_zmeny_monitor,
-            'nadcas_2_zmeny_o'   => $this->nadcas_2_zmeny_operator,
-            'zastavenia_text_f'  => $this->zastavenia_text_fab,
-            'zastavenia_int_f'   => $this->zastavenia_int_fab,
-            'udrzba_t'           => $this->udrzba_text,
-            'udrzba_i'           => $this->udrzba_int,
-            'logistika_t'        => $this->logistika_text,
-            'logistika_i'        => $this->logistika_int,
-            'saturacia_t'        => $this->saturacia_text,
-            'saturacia_i'        => $this->saturacia_int,
-            'nedostatok_t'       => $this->nedostatok_text,
-            'nedostatok_i'       => $this->nedostatok_int,
-        ];
     }
 }

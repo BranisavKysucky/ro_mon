@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Uep;
 use App\Entity\Zaznam;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -15,36 +17,36 @@ class ZaznamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('den', DateType::class, ["widget" => "single_text", "format" => "dd-MM-yyyy"])
-                ->add('linka', TextType :: class)
-                ->add('zmena', TextType  :: class)
-                ->add('nadcas', NumberType :: class)
-                ->add('uep', TextType :: class)
-                ->add('suma_pracovnikov_monitor', NumberType :: class)
-                ->add('suma_pracovnikov_operator', NumberType :: class)
-                ->add('pn_lekar_monitor', NumberType :: class)
-                ->add('pn_lekar_operator', NumberType :: class)
-                ->add('dovolenka_nv_monitor', NumberType :: class)
-                ->add('dovolenka_nv_operator', NumberType :: class)
-                ->add('ine_monitor', NumberType :: class)
-                ->add('ine_operator', NumberType :: class)
-                ->add('skolenie_monitor', NumberType :: class)
-                ->add('skolenie_operator', NumberType :: class)
-                ->add('pozicany_monitor', NumberType :: class)
-                ->add('pozicany_operator', NumberType :: class)
-                ->add('vypozicany_monitor', NumberType :: class)
-                ->add('vypozicany_operator', NumberType :: class)
-                ->add('nadcas_2_zmeny_monitor', NumberType :: class)
-                ->add('nadcas_2_zmeny_operator', NumberType :: class)
-                ->add('zastavenia_text_fab', TextType :: class, ['empty_data' => ''])
-                ->add('zastavenia_int_fab', NumberType :: class)
-                ->add('udrzba_text', TextType :: class, ['empty_data' => ''])
-                ->add('udrzba_int', NumberType :: class)
-                ->add('logistika_text', TextType :: class, ['empty_data' => ''])
-                ->add('logistika_int', NumberType :: class)
-                ->add('saturacia_text', TextType :: class, ['empty_data' => ''])
-                ->add('saturacia_int', NumberType :: class)
-                ->add('nedostatok_text', TextType :: class, ['empty_data' => ''])
-                ->add('nedostatok_int', NumberType :: class);
+                ->add('zmena', TextType::class)
+                ->add('nadcas', NumberType::class)
+                ->add('uep', EntityType::class, ['class' => Uep::class])
+                ->add('pocet_vyrobenych', NumberType::class)
+                ->add('suma_pracovnikov_monitor', NumberType::class)
+                ->add('suma_pracovnikov_operator', NumberType::class)
+                ->add('pn_lekar_monitor', NumberType::class)
+                ->add('pn_lekar_operator', NumberType::class)
+                ->add('dovolenka_nv_monitor', NumberType::class)
+                ->add('dovolenka_nv_operator', NumberType::class)
+                ->add('ine_monitor', NumberType::class)
+                ->add('ine_operator', NumberType::class)
+                ->add('skolenie_monitor', NumberType::class)
+                ->add('skolenie_operator', NumberType::class)
+                ->add('pozicany_monitor', NumberType::class)
+                ->add('pozicany_operator', NumberType::class)
+                ->add('vypozicany_monitor', NumberType::class)
+                ->add('vypozicany_operator', NumberType::class)
+                ->add('nadcas_druha_zmena_monitor', NumberType::class)
+                ->add('nadcas_druha_zmena_operator', NumberType::class)
+                ->add('zastavenia_fab_info', TextType::class, ['empty_data' => ''])
+                ->add('zastavenia_fab_pocet', NumberType::class)
+                ->add('udrzba_info', TextType::class, ['empty_data' => ''])
+                ->add('udrzba_pocet', NumberType::class)
+                ->add('logistika_info', TextType::class, ['empty_data' => ''])
+                ->add('logistika_pocet', NumberType::class)
+                ->add('saturacia_info', TextType::class, ['empty_data' => ''])
+                ->add('saturacia_pocet', NumberType::class)
+                ->add('nedostatok_info', TextType::class, ['empty_data' => ''])
+                ->add('nedostatok_pocet', NumberType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
