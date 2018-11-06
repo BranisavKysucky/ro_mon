@@ -9,6 +9,7 @@ Encore
 
     .createSharedEntry('vendor', [
         'jquery',
+        'babel-polyfill',
         'promise-polyfill',
         'sweetalert2',
         '@fortawesome/fontawesome-free/scss/fontawesome.scss',
