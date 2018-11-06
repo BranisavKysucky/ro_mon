@@ -1,6 +1,7 @@
 'use strict';
 
 $(() => {
+    $('[data-toggle="tooltip"]').tooltip();
     $('select.selectpicker').selectpicker();
 
     $('select.search-control').change((e) => {
@@ -27,6 +28,10 @@ $(() => {
         }
 
         $('.selectpicker').selectpicker('refresh');
+    });
+
+    $('.ro-calc-control').change(() => {
+        calcRo();
     });
 
     $('form input').keydown((e) => {
@@ -112,5 +117,27 @@ $(() => {
                     title: 'Chyba pri sťahovaní cieľov!'
                 });
             });
+    }
+
+    function calcRo() {
+        let teoretickaVyroba = parseInt($('#teoreticka-vyroba').val());
+        let vyrobenych = parseInt($('#pocet-vyrobenych').val());
+
+        if (isNaN(vyrobenych) || isNaN(teoretickaVyroba)) {
+            return;
+        }
+
+        // let sum = 0;
+        //
+        // $.each($('input.ro-calc-data'), (i, e) => {
+        //     let value = parseInt(e.value);
+        //
+        //     if (!isNaN(value)) {
+        //         sum += value;
+        //     }
+        // });
+
+        $('#roVal').text((vyrobenych * 100 / teoretickaVyroba) + ' %');
+        $('#nonRoVal').text((100 - (vyrobenych * 100 / teoretickaVyroba)) + ' %');
     }
 });
