@@ -71,6 +71,7 @@ class DefaultController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $zaznam->setZaznamenany(new \DateTime());
             $em->flush();
         }
 

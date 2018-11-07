@@ -24,6 +24,15 @@ class Zaznam
     private $id;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var \DateTime|null
+     */
+    private $zaznamenany;
+
+    /**
      * @ORM\Column(type="date")
      *
      * @Serializer\Groups({"zaznam"})
@@ -311,6 +320,34 @@ class Zaznam
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * Get zaznamenany
+     *
+     * @return \DateTime|null
+     */
+    public function getZaznamenany(): ?\DateTime
+    {
+        return $this->zaznamenany;
+    }
+
+    /**
+     * Set zaznamenany
+     *
+     * @param \DateTime|null $zaznamenany
+     *
+     * @return Zaznam
+     */
+    public function setZaznamenany(?\DateTime $zaznamenany): self
+    {
+        if ($zaznamenany == null) {
+            $this->zaznamenany = null;
+        } else {
+            $this->zaznamenany = new \DateTime($zaznamenany->format('Y-m-d H:i:s'));
+        }
+
+        return $this;
     }
 
     /**
