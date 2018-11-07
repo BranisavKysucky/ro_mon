@@ -31,20 +31,27 @@ body {
 
 #navbar {
     display: flex;
+    justify-content: flex-start;
     height: 5em;
     padding: 0 0.5em 0 0.5em;
-}
-#navbar .col {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ECECEC;
-    height: calc(100% - 1em);
-    padding: 0px;
-    margin-right: 5px;
-}
-#navbar label {
-    color: #6c757d;
-    display: block;
+
+    .col {
+        display: flex;
+        align-items: center;
+        //max-width: 200px;
+        // flex-wrap: nowrap;
+        border: 1px solid #ECECEC;
+        height: calc(100% - 1em);
+        padding: 0px;
+        // margin-right: 5px;
+        // margin-bottom: 0px;
+    }
+    .myBtn{
+        width: 100px;
+        height: 2.5em;
+        margin-left: 300px;
+        //flex-grow: 1;
+    }
 }
 
 .dropdown-toggle:focus {
@@ -75,7 +82,7 @@ body {
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.14), 0px 2px 10px rgba(3, 141, 209, 0.4);
     border-radius: 3px;
 
-    h1 {
+    h2 {
         margin: 0 0 0 1rem;
     }
 
@@ -133,11 +140,12 @@ body {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    //margin-bottom: 0.5rem;
 }
 .telo .riadok:nth-child(1) {
     /*margin-bottom: -17px;*/
     color: #4F4F4F;
+    margin-bottom: -10px;
 }
 .telo .riadok .col {
     padding-right: 0;

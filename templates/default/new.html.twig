@@ -9,56 +9,50 @@
 {% block body %}
     <form id="horna-tab-form" data-zaznam-id="" autocomplete="off">
         <div class="row" id="navbar">
-            <div class="col-6 mt-3">
-                <div class="row">
-                    <div class="col-3">
-                        <select id="den" name="den" title="DÁTUM" id="datum" class="selectpicker search-control"
-                                data-width="100%">
-                            {% for datum in datumy %}
-                                <option value="{{ datum }}" {{ loop.first ? 'selected' : '' }}>{{ datum }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="col-3">
-                        <select id="linka_uep" class="selectpicker show-menu-arrow shadow-sm uep search-control"
-                                data-width="100%" title="Linka - Uep" name="uep">
-                            <option selected value="-1"></option>
-                            {% for data in uepSelectData %}
-                                <optgroup label="{{ data[0][0] }}">
-                                    {% for uep in data[0][1] %}
-                                        <option value="{{ uep[0] }}">{{ uep[1] }}</option>
-                                    {% endfor %}
-                                </optgroup>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="col-3">
-                        <select id="zmena" class="selectpicker shadow-sm zmena search-control" data-width="100%"
-                                title="Zmena"
-                                name="zmena" disabled>
-                            <option selected value="-1"></option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                        </select>
-                    </div>
-                    <div class="col-3">
-                        <input id="nadcas" class="form-control nadcas" title="Nadcas" name="nadcas" placeholder="Nadčas"
-                               disabled/>
-                    </div>
-                </div>
+            <div class="col">
+                <select id="den" name="den" title="DÁTUM" id="datum" class="selectpicker search-control">
+                    {% for datum in datumy %}
+                        <option value="{{ datum }}" {{ loop.first ? 'selected' : '' }}>{{ datum }}</option>
+                    {% endfor %}
+                </select>
             </div>
-            <div class="col-6 mt-3 text-right">
-                <button class="btn btn-outline-primary shadow-sm myBtn" type="submit" style="width: 20rem;">Potvrď
-                </button>
+            <div class="col">
+                <select id="linka_uep" class="selectpicker show-menu-arrow shadow-sm uep search-control"
+                            title="Linka - Uep" name="uep">
+                    <option selected value="-1"></option>
+                    {% for data in uepSelectData %}
+                        <optgroup label="{{ data[0][0] }}">
+                            {% for uep in data[0][1] %}
+                                <option value="{{ uep[0] }}">{{ uep[1] }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endfor %}
+                </select>
             </div>
+            <div class="col">
+                <select id="zmena" class="selectpicker shadow-sm zmena search-control" 
+                        title="Zmena"
+                        name="zmena" disabled>
+                    <option selected value="-1"></option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            </div>
+            <div class="col">
+                <input id="nadcas" class="form-control nadcas" title="Nadcas" name="nadcas" placeholder="Nadčas"
+                        disabled/>
+            </div>
+            <button class="btn btn-outline-primary shadow-sm myBtn" type="submit">Potvrď
+            </button>
         </div>
+
 
         <div class="row" id="telo">
             <div class="col" id="Dochadzka">
                 <div class="row karta" id="kartaDochadzka">
-                    <h1 class="no-selection"><i class="fas fa-user-friends"></i> Dochádzka</h1>
+                    <h2 class="no-selection"><i class="fas fa-user-friends"></i> Dochádzka</h2>
                 </div>
                 <div class="telo">
                     <div class="riadok">
@@ -184,7 +178,7 @@
             </div>
             <div class="col" id="ro">
                 <div class="row karta" id="kartaRO">
-                    <h1 class="no-selection"><i class="fas fa-tachometer-alt"></i> RO</h1>
+                    <h2 class="no-selection"><i class="fas fa-tachometer-alt"></i> RO</h2>
                     <div style="display: inherit; margin-right: 1rem; text-align: center;">
                         <div class="ro-title-value-item" style="margin-right: .5rem;">
                             <h6 class="no-selection">Efektivita</h6>
