@@ -21,12 +21,14 @@ $(() => {
             case 'zmena':
                 $('#nadcas').prop('disabled', false);
                 $('input.data-in-control').prop('disabled', false);
-
-                getData();
-                getCiele();
                 break;
             default:
                 break;
+        }
+
+        if ($('select[name="linka_uep"]').val() !== '-1' && $('select[name="zmena"]').val() !== '-1') {
+            getData();
+            getCiele();
         }
 
         $('.selectpicker').selectpicker('refresh');
