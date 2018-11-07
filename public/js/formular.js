@@ -20,12 +20,17 @@ $(document).ready(function () {
         });
     });
 
+
+
+
     $("[title='DÁTUM']").prop('disabled', false);
 
+
     $("[title='DÁTUM']").change(function(event) {
-        if ($(this).val() === '-1') {
+       if ($(this).val() === '-1') {
             return;
         }
+
 
         $("[title='LINKA']").prop('disabled', false);
     });
@@ -61,6 +66,7 @@ $(document).ready(function () {
             zmena: $('select[name="zmena"]').val(),
             uep: $('select[name="uep"]').val(),
             nadcas: $('#nadcas').val()
+
         };
 
         console.log(mojeData);
@@ -106,6 +112,7 @@ $(document).ready(function () {
                 $('input[name="nedostatok_text"]').val(data.zaznamData.nedostatok_t);
                 $('input[name="nedostatok_int"]').val(data.zaznamData.nedostatok_i);
             });
+
     });
     location.reload(forceGet)
 });
