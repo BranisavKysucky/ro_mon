@@ -78,10 +78,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="suma_pracovnikov_monitor"/>
+                            <input class="form-control data-in-control" name="suma_pracovnikov_monitor" disabled/>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="suma_pracovnikov_operator"/>
+                            <input class="form-control data-in-control" name="suma_pracovnikov_operator" disabled/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -92,10 +92,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="pn_lekar_monitor"/>
+                            <input class="form-control data-in-control" name="pn_lekar_monitor" disabled/>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="pn_lekar_operator"/>
+                            <input class="form-control data-in-control" name="pn_lekar_operator" disabled/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -106,10 +106,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="dovolenka_nv_monitor"/>
+                            <input class="form-control data-in-control" name="dovolenka_nv_monitor" disabled/>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="dovolenka_nv_operator"/>
+                            <input class="form-control data-in-control" name="dovolenka_nv_operator" disabled/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -119,10 +119,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="ine_monitor"/>
+                            <input class="form-control data-in-control" name="ine_monitor" disabled/>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="ine_operator"/>
+                            <input class="form-control data-in-control" name="ine_operator" disabled/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -132,10 +132,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="skolenie_monitor"/>
+                            <input class="form-control data-in-control" name="skolenie_monitor" disabled/>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="skolenie_operator"/>
+                            <input class="form-control data-in-control" name="skolenie_operator" disabled/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -146,10 +146,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="pozicany_monitor"/>
+                            <input class="form-control data-in-control" name="pozicany_monitor" disabled/>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="pozicany_operator"/>
+                            <input class="form-control data-in-control" name="pozicany_operator" disabled/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -160,10 +160,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="vypozicany_monitor"/>
+                            <input class="form-control data-in-control" name="vypozicany_monitor" disabled/>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="vypozicany_operator"/>
+                            <input class="form-control data-in-control" name="vypozicany_operator" disabled/>
                         </div>
                     </div>
                     <div class="riadok">
@@ -174,10 +174,10 @@
                             </div>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="nadcas_druha_zmena_monitor"/>
+                            <input class="form-control data-in-control" name="nadcas_druha_zmena_monitor" disabled/>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="nadcas_druha_zmena_operator"/>
+                            <input class="form-control data-in-control" name="nadcas_druha_zmena_operator" disabled/>
                         </div>
                     </div>
                 </div>
@@ -188,15 +188,15 @@
                     <div style="display: inherit; margin-right: 1rem; text-align: center;">
                         <div class="ro-title-value-item" style="margin-right: .5rem;">
                             <h6 class="no-selection">Efektivita</h6>
-                            <span id="efektivitaVal" class="ro-title-values">0 %</span>
+                            <span id="efektivitaVal" class="ro-title-values no-selection">0 %</span>
                         </div>
                         <div class="ro-title-value-item" style="margin-right: .5rem;">
                             <h6 class="no-selection">RO</h6>
-                            <span id="roVal" class="ro-title-values">0 %</span>
+                            <span id="roVal" class="ro-title-values no-selection">0 %</span>
                         </div>
                         <div class="ro-title-value-item">
                             <h6 class="no-selection">Non RO</h6>
-                            <span id="nonRoVal" class="ro-title-values">0 %</span>
+                            <span id="nonRoVal" class="ro-title-values no-selection">0 %</span>
                         </div>
                     </div>
                 </div>
@@ -210,8 +210,8 @@
                         <div class="col-4"><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom"
                                               title="Tooltip on bottom"></i> Počet vyrobených
                         </div>
-                        <div class="col-2"><input id="pocet-vyrobenych" class="form-control pull-right ro-calc-control"
-                                                  name="pocet_vyrobenych"/></div>
+                        <div class="col-2"><input id="pocet-vyrobenych" class="form-control pull-right ro-calc-control data-in-control"
+                                                  name="pocet_vyrobenych" disabled/></div>
                     </div>
                     <div class="riadok" style="margin-top: .4rem;">
                         <div class="col-12"
@@ -222,10 +222,10 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data" name="zastavenia_fab_pocet"/>
+                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="zastavenia_fab_pocet" disabled/>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control" name="zastavenia_fab_info" rows="2"></textarea>
+                            <textarea class="form-control" name="zastavenia_fab_info" rows="2" disabled></textarea>
                         </div>
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
@@ -233,10 +233,10 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data" name="udrzba_pocet"/>
+                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="udrzba_pocet" disabled/>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control" name="udrzba_info" rows="2"></textarea>
+                            <textarea class="form-control" name="udrzba_info" rows="2" disabled></textarea>
                         </div>
                         <div class="col-12"
                              style="border-top: 1px solid #c5c5c5; margin-top: .5rem; padding-top: .5rem;">
@@ -246,10 +246,10 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data" name="logistika_pocet"/>
+                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="logistika_pocet" disabled/>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control" name="logistika_info" rows="2"></textarea>
+                            <textarea class="form-control" name="logistika_info" rows="2" disabled></textarea>
                         </div>
 
                         <div class="col-12">
@@ -259,10 +259,10 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data" name="saturacia_pocet"/>
+                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="saturacia_pocet" disabled/>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control" name="saturacia_info" rows="2"></textarea>
+                            <textarea class="form-control" name="saturacia_info" rows="2" disabled></textarea>
                         </div>
 
                         <div class="col-12">
@@ -272,10 +272,10 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data" name="nedostatok_pocet"/>
+                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="nedostatok_pocet" disabled/>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control" name="nedostatok_info" rows="2"></textarea>
+                            <textarea class="form-control" name="nedostatok_info" rows="2" disabled></textarea>
                         </div>
                     </div>
                 </div>

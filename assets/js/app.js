@@ -20,6 +20,8 @@ $(() => {
                 break;
             case 'zmena':
                 $('#nadcas').prop('disabled', false);
+                $('input.data-in-control').prop('disabled', false);
+
                 getData();
                 getCiele();
                 break;
