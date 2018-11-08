@@ -28,7 +28,6 @@ $(() => {
 
         if ($('select[name="linka_uep"]').val() !== '-1' && $('select[name="zmena"]').val() !== '-1') {
             getData();
-            getCiele();
         }
 
         $('.selectpicker').selectpicker('refresh');
@@ -98,7 +97,6 @@ $(() => {
         });
     });
 
-
     function getData() {
         let uepId = $('select[name="uep"]').val();
 
@@ -106,57 +104,58 @@ $(() => {
             den: $('select[name="den"]').val(),
             uep: uepId,
             zmena: $('select[name="zmena"]').val()
-        }).then((data) => {
-            let form = $('#horna-tab-form');
-            form.data('zaznam-id', data.id);
-
-            $.each(data, function (key, value) {
-                let ctrl = $('input[name=' + key + ']', form);
-
-                if (ctrl !== undefined) {
-                    ctrl.val(value);
-                }
-            });
-        }).fail(() => {
-            swal({
-                type: 'error',
-                title: 'Chyba pri sťahovaní záznamu!'
-            });
-        });
-    }
-
-    function getCiele() {
-        let uepId = $('select[name="uep"]').val();
-
-        $.get(`/ueps/${uepId}/ciel`)
+        })
             .then((data) => {
-                let roCard = $('#ro');
-                let rozdielPlanVyroba = $('#rozdiel-plan-vyroba');
+                let form = $('#horna-tab-form');
+                form.data('zaznam-id', data.id);
 
-                roCard.data('hodinova-produkcia', data['ciel_hodinova_vyroba']);
-                roCard.data('ro-ciel', data['ciel_ro']);
-                roCard.data('efektivita-ciel', data['ciel_efektivita']);
+                $.each(data, function (key, value) {
+                    let ctrl = $('input[name=' + key + ']', form);
 
-                let nadcas = parseInt($('#nadcas').val());
-                // 7.5 = 7h 30min vyroby
-                let maxVyroby = Math.round((7.5 + (nadcas / 60)) * data['ciel_hodinova_vyroba']);
-                let cielVyroby = Math.floor(maxVyroby * data['ciel_ro']);
-                let vyrobenych = parseInt($('#pocet-vyrobenych').val());
+                    if (ctrl !== undefined) {
+                        ctrl.val(value);
+                    }
+                });
+            })
+            .then(() => {
+                let uepId = $('select[name="uep"]').val();
 
-                $('#max-vyroba').val(maxVyroby);
-                $('#ciel-vyroba').val(cielVyroby);
+                $.get(`/ueps/${uepId}/ciel`)
+                    .then((data) => {
+                        let roCard = $('#ro');
+                        let rozdielPlanVyroba = $('#rozdiel-plan-vyroba');
 
-                rozdielPlanVyroba.text(vyrobenych - cielVyroby);
-                if ((vyrobenych - cielVyroby) < 0) {
-                    rozdielPlanVyroba.css({color: 'red'});
-                } else {
-                    rozdielPlanVyroba.css({color: 'white'});
-                }
+                        roCard.data('hodinova-produkcia', data['ciel_hodinova_vyroba']);
+                        roCard.data('ro-ciel', data['ciel_ro']);
+                        roCard.data('efektivita-ciel', data['ciel_efektivita']);
+
+                        let nadcas = parseInt($('#nadcas').val());
+                        // 7.5 = 7h 30min vyroby
+                        let maxVyroby = Math.round((7.5 + (nadcas / 60)) * data['ciel_hodinova_vyroba']);
+                        let cielVyroby = Math.floor(maxVyroby * data['ciel_ro']);
+                        let vyrobenych = parseInt($('#pocet-vyrobenych').val());
+
+                        $('#max-vyroba').val(maxVyroby);
+                        $('#ciel-vyroba').val(cielVyroby);
+
+                        rozdielPlanVyroba.text(vyrobenych - cielVyroby);
+                        if ((vyrobenych - cielVyroby) < 0) {
+                            rozdielPlanVyroba.css({color: 'red'});
+                        } else {
+                            rozdielPlanVyroba.css({color: 'white'});
+                        }
+                    })
+                    .fail(() => {
+                        swal({
+                            type: 'error',
+                            title: 'Chyba pri sťahovaní cieľov!'
+                        });
+                    });
             })
             .fail(() => {
                 swal({
                     type: 'error',
-                    title: 'Chyba pri sťahovaní cieľov!'
+                    title: 'Chyba pri sťahovaní záznamu!'
                 });
             });
     }
