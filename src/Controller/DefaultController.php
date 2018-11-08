@@ -119,7 +119,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route(path="/ciel/{uep}", methods={"GET"}, name="get_ciel_action")
+     * @Route(path="/ueps/{uep}/ciel", methods={"GET"}, name="get_ciel_action")
      *
      * @param Uep                    $uep
      * @param EntityManagerInterface $em
@@ -130,13 +130,12 @@ class DefaultController extends AbstractController
     public function getCielAction(Uep $uep, EntityManagerInterface $em, SerializerInterface $serializer)
     {
         try {
-            $linka = $uep->getLinka();
             $ciel  = $em->createQueryBuilder()->select('c')
                         ->from('App:Ciel', 'c')
-                        ->where('c.linka = ?1')
+                        ->where('c.uep = ?1')
                         ->orderBy('c.platnostOd', 'DESC')
                         ->setMaxResults(1)
-                        ->setParameter(1, $linka)
+                        ->setParameter(1, $uep)
                         ->getQuery()
                         ->getSingleResult();
 

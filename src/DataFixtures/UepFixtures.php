@@ -18,21 +18,26 @@ class UepFixtures extends BaseFixture implements DependentFixtureInterface
         $hc = $this->getReference(Linka::class.'_0');
         /** @var Linka $mv */
         $mv = $this->getReference(Linka::class.'_1');
+        /** @var Linka $log */
+        $log = $this->getReference(Linka::class.'_2');
 
         $data = [
             ['HC0', $hc],
             ['HC1', $hc],
             ['HC2', $hc],
-            ['HC3', $hc],
             ['GA', $hc],
             ['PB', $hc],
             ['PP', $hc],
+            ['KPP', $hc],
             ['KIT', $hc],
+            ['HC3', $mv],
             ['MV1', $mv],
             ['MV2', $mv],
             ['MV3', $mv],
             ['MV4', $mv],
             ['PM', $mv],
+            ['LOG 1', $log],
+            ['LOG 2', $log],
         ];
 
         $this->createMany(

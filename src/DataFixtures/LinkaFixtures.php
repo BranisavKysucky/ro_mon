@@ -12,7 +12,7 @@ class LinkaFixtures extends BaseFixture
      */
     protected function loadData(ObjectManager $manager)
     {
-        $data = ['HC', 'MV'];
+        $data = ['HC', 'MV', 'LOG'];
 
         $this->createMany(
             Linka::class,

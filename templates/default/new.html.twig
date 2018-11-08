@@ -202,16 +202,23 @@
                 </div>
                 <div class="telo" style="justify-content: start; margin-top: 0;">
                     <div class="row">
-                        <div class="col-4"><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom"
+                        <div class="col-2"><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom"
                                               title="Tooltip on bottom"></i> Teoretická výroba
                         </div>
-                        <div class="col-2"><input id="teoreticka-vyroba" class="form-control pull-right" readonly/>
+                        <div class="col-2"><input id="max-vyroba" class="form-control pull-right" readonly/>
                         </div>
-                        <div class="col-4"><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom"
+                        <div class="col-2"><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom"
+                                              title="Tooltip on bottom"></i> Plánovaná výroba
+                        </div>
+                        <div class="col-2"><input id="ciel-vyroba" class="form-control pull-right" readonly/>
+                        </div>
+                        <div class="col-2"><i class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom"
                                               title="Tooltip on bottom"></i> Počet vyrobených
                         </div>
-                        <div class="col-2"><input id="pocet-vyrobenych" class="form-control pull-right ro-calc-control data-in-control"
-                                                  name="pocet_vyrobenych" disabled/></div>
+                        <div class="col-2 text-center">
+                            <input id="pocet-vyrobenych" class="form-control pull-right ro-calc-control data-in-control" name="pocet_vyrobenych" disabled/>
+                            <span id="rozdiel-plan-vyroba" class="small"></span>
+                        </div>
                     </div>
                     <div class="riadok" style="margin-top: .4rem;">
                         <div class="col-12"
@@ -225,7 +232,7 @@
                             <input class="form-control ro-calc-control ro-calc-data data-in-control" name="zastavenia_fab_pocet" disabled/>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control" name="zastavenia_fab_info" rows="2" disabled></textarea>
+                            <textarea class="form-control data-in-control" name="zastavenia_fab_info" rows="2" disabled></textarea>
                         </div>
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
@@ -236,7 +243,7 @@
                             <input class="form-control ro-calc-control ro-calc-data data-in-control" name="udrzba_pocet" disabled/>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control" name="udrzba_info" rows="2" disabled></textarea>
+                            <textarea class="form-control data-in-control" name="udrzba_info" rows="2" disabled></textarea>
                         </div>
                         <div class="col-12"
                              style="border-top: 1px solid #c5c5c5; margin-top: .5rem; padding-top: .5rem;">
@@ -249,9 +256,8 @@
                             <input class="form-control ro-calc-control ro-calc-data data-in-control" name="logistika_pocet" disabled/>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control" name="logistika_info" rows="2" disabled></textarea>
+                            <textarea class="form-control data-in-control" name="logistika_info" rows="2" disabled></textarea>
                         </div>
-
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
                                                          data-placement="bottom" title="Tooltip on bottom"></i>
@@ -262,20 +268,19 @@
                             <input class="form-control ro-calc-control ro-calc-data data-in-control" name="saturacia_pocet" disabled/>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control" name="saturacia_info" rows="2" disabled></textarea>
+                            <textarea class="form-control data-in-control" name="saturacia_info" rows="2" disabled></textarea>
                         </div>
-
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
                                                          data-placement="bottom" title="Tooltip on bottom"></i>
                                 Nedostatok
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-2" style="margin-bottom: 1rem;">
                             <input class="form-control ro-calc-control ro-calc-data data-in-control" name="nedostatok_pocet" disabled/>
                         </div>
-                        <div class="col-10">
-                            <textarea class="form-control" name="nedostatok_info" rows="2" disabled></textarea>
+                        <div class="col-10" style="margin-bottom: 1rem;">
+                            <textarea class="form-control data-in-control" name="nedostatok_info" rows="2" disabled></textarea>
                         </div>
                     </div>
                 </div>

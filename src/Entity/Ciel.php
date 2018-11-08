@@ -32,14 +32,14 @@ class Ciel
     private $platnostOd;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Linka")
-     * @ORM\JoinColumn(name="linka_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Uep")
+     * @ORM\JoinColumn(name="uep_id", referencedColumnName="id", nullable=false)
      *
      * @Serializer\Groups({"zaznam"})
      *
-     * @var Linka
+     * @var Uep
      */
-    private $linka;
+    private $uep;
 
     /**
      * @ORM\Column(type="float", options={"unsigned":true})
@@ -48,7 +48,7 @@ class Ciel
      *
      * @var float
      */
-    private $cielTeoretickaVyroba;
+    private $cielHodinovaVyroba;
 
     /**
      * @ORM\Column(type="float", options={"unsigned":true})
@@ -57,7 +57,7 @@ class Ciel
      *
      * @var float
      */
-    private $cielRO;
+    private $cielRo;
 
     /**
      * @ORM\Column(type="float", options={"unsigned":true})
@@ -103,73 +103,73 @@ class Ciel
     }
 
     /**
-     * Get linka
+     * Get uep
      *
-     * @return Linka
+     * @return Uep
      */
-    public function getLinka(): Linka
+    public function getUep(): Uep
     {
-        return $this->linka;
+        return $this->uep;
     }
 
     /**
-     * Set linka
+     * Set uep
      *
-     * @param Linka $linka
+     * @param Uep $uep
      *
      * @return Ciel
      */
-    public function setLinka(Linka $linka): self
+    public function setUep(Uep $uep): self
     {
-        $this->linka = $linka;
+        $this->uep = $uep;
 
         return $this;
     }
 
     /**
-     * Get cielTeoretickaVyroba
+     * Get cielHodinovaVyroba
      *
      * @return float
      */
-    public function getCielTeoretickaVyroba(): float
+    public function getCielHodinovaVyroba(): float
     {
-        return $this->cielTeoretickaVyroba;
+        return $this->cielHodinovaVyroba;
     }
 
     /**
-     * Set cielTeoretickaVyroba
+     * Set cielHodinovaVyroba
      *
-     * @param float $cielTeoretickaVyroba
+     * @param float $cielHodinovaVyroba
      *
      * @return Ciel
      */
-    public function setCielTeoretickaVyroba(float $cielTeoretickaVyroba): self
+    public function setCielHodinovaVyroba(float $cielHodinovaVyroba): self
     {
-        $this->cielTeoretickaVyroba = $cielTeoretickaVyroba;
+        $this->cielHodinovaVyroba = $cielHodinovaVyroba;
 
         return $this;
     }
 
     /**
-     * Get cielRO
+     * Get cielRo
      *
      * @return float
      */
-    public function getCielRO(): float
+    public function getCielRo(): float
     {
-        return $this->cielRO;
+        return $this->cielRo;
     }
 
     /**
-     * Set cielRO
+     * Set cielRo
      *
-     * @param float $cielRO
+     * @param float $cielRo
      *
      * @return Ciel
      */
-    public function setCielRO(float $cielRO): self
+    public function setCielRo(float $cielRo): self
     {
-        $this->cielRO = $cielRO;
+        $this->cielRo = $cielRo;
 
         return $this;
     }

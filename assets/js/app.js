@@ -20,7 +20,7 @@ $(() => {
                 break;
             case 'zmena':
                 $('#nadcas').prop('disabled', false);
-                $('input.data-in-control').prop('disabled', false);
+                $('.data-in-control').prop('disabled', false);
                 break;
             default:
                 break;
@@ -34,7 +34,29 @@ $(() => {
         $('.selectpicker').selectpicker('refresh');
     });
 
-    $('.ro-calc-control').change(() => {
+    $('.ro-calc-control').keyup(() => {
+        calcRo();
+    });
+
+    $('#nadcas').keyup((e) => {
+        let nadcas = 0;
+        let jElem = $(e.currentTarget);
+        if (jElem.val().length !== 0) {
+            nadcas = parseInt(jElem.val());
+        } else {
+            jElem.val(0);
+        }
+
+        let hodinovka = parseFloat($('#ro').data('hodinova-produkcia'));
+        let cielRo = parseFloat($('#ro').data('ro-ciel'));
+        let maxVyroba = $('#max-vyroba');
+        let planVyroby = $('#ciel-vyroba');
+
+        let maxVyroby = Math.round((7.5 + (nadcas / 60)) * hodinovka);
+
+        maxVyroba.val(maxVyroby);
+        planVyroby.val(Math.round(maxVyroby * cielRo));
+
         calcRo();
     });
 
@@ -106,14 +128,30 @@ $(() => {
     function getCiele() {
         let uepId = $('select[name="uep"]').val();
 
-        $.get(`/ciel/${uepId}`)
+        $.get(`/ueps/${uepId}/ciel`)
             .then((data) => {
                 let roCard = $('#ro');
+                let rozdielPlanVyroba = $('#rozdiel-plan-vyroba');
 
+                roCard.data('hodinova-produkcia', data['ciel_hodinova_vyroba']);
                 roCard.data('ro-ciel', data['ciel_ro']);
                 roCard.data('efektivita-ciel', data['ciel_efektivita']);
 
-                $('#teoreticka-vyroba').val(data['ciel_teoreticka_vyroba']);
+                let nadcas = parseInt($('#nadcas').val());
+                // 7.5 = 7h 30min vyroby
+                let maxVyroby = Math.round((7.5 + (nadcas / 60)) * data['ciel_hodinova_vyroba']);
+                let cielVyroby = Math.floor(maxVyroby * data['ciel_ro']);
+                let vyrobenych = parseInt($('#pocet-vyrobenych').val());
+
+                $('#max-vyroba').val(maxVyroby);
+                $('#ciel-vyroba').val(cielVyroby);
+
+                rozdielPlanVyroba.text(vyrobenych - cielVyroby);
+                if ((vyrobenych - cielVyroby) < 0) {
+                    rozdielPlanVyroba.css({color: 'red'});
+                } else {
+                    rozdielPlanVyroba.css({color: 'white'});
+                }
             })
             .fail(() => {
                 swal({
@@ -124,24 +162,34 @@ $(() => {
     }
 
     function calcRo() {
-        let teoretickaVyroba = parseInt($('#teoreticka-vyroba').val());
+        let roCard = $('#ro');
+        let roVal = $('#roVal');
+        let nonRoVal = $('#nonRoVal');
+        let cielVyroba = $('#ciel-vyroba');
+        let rozdielPlanVyroba = $('#rozdiel-plan-vyroba');
+        let maxVyroba = parseInt($('#max-vyroba').val());
         let vyrobenych = parseInt($('#pocet-vyrobenych').val());
 
-        if (isNaN(vyrobenych) || isNaN(teoretickaVyroba)) {
+        if (isNaN(vyrobenych) || isNaN(maxVyroba)) {
             return;
         }
 
-        // let sum = 0;
-        //
-        // $.each($('input.ro-calc-data'), (i, e) => {
-        //     let value = parseInt(e.value);
-        //
-        //     if (!isNaN(value)) {
-        //         sum += value;
-        //     }
-        // });
+        let ro = vyrobenych / maxVyroba;
+        let roCiel = parseFloat(roCard.data('ro-ciel'));
+        let roPerc = Math.round(ro * 100);
 
-        $('#roVal').text((vyrobenych * 100 / teoretickaVyroba) + ' %');
-        $('#nonRoVal').text((100 - (vyrobenych * 100 / teoretickaVyroba)) + ' %');
+        roVal.text(roPerc + ' %');
+        nonRoVal.text((100 - roPerc) + ' %');
+        rozdielPlanVyroba.text(vyrobenych - parseInt(cielVyroba.val()));
+
+        rozdielPlanVyroba.css({color: 'black'});
+        let cssObj = {color: 'white'};
+        if (ro < roCiel) {
+            cssObj.color = 'red';
+            rozdielPlanVyroba.css({color: 'red'});
+        }
+
+        roVal.css(cssObj);
+        nonRoVal.css(cssObj);
     }
 });
