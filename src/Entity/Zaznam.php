@@ -223,6 +223,24 @@ class Zaznam
     private $nadcasDruhaZmenaOperator = 0;
 
     /**
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
+     */
+    private $neobsadeneModulyMonitor = 0;
+
+    /**
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
+     */
+    private $neobsadeneModulyOperator = 0;
+
+    /**
      * @ORM\Column(type="text", options={"default":""})
      *
      * @Serializer\Groups({"zaznam"})
@@ -311,6 +329,24 @@ class Zaznam
      * @var integer
      */
     private $nedostatokPocet = 0;
+
+    /**
+     * @ORM\Column(type="text", options={"default":""})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var string
+     */
+    private $pocetZastaveniInfo = "";
+
+    /**
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var integer
+     */
+    private $pocetZastaveni = 0;
 
     /**
      * Get id
@@ -855,6 +891,54 @@ class Zaznam
     }
 
     /**
+     * Get neobsadeneModulyMonitor
+     *
+     * @return int
+     */
+    public function getNeobsadeneModulyMonitor(): int
+    {
+        return $this->neobsadeneModulyMonitor;
+    }
+
+    /**
+     * Set neobsadeneModulyMonitor
+     *
+     * @param int $neobsadeneModulyMonitor
+     *
+     * @return Zaznam
+     */
+    public function setNeobsadeneModulyMonitor(int $neobsadeneModulyMonitor): self
+    {
+        $this->neobsadeneModulyMonitor = $neobsadeneModulyMonitor;
+
+        return $this;
+    }
+
+    /**
+     * Get neobsadeneModulyOperator
+     *
+     * @return int
+     */
+    public function getNeobsadeneModulyOperator(): int
+    {
+        return $this->neobsadeneModulyOperator;
+    }
+
+    /**
+     * Set neobsadeneModulyOperator
+     *
+     * @param int $neobsadeneModulyOperator
+     *
+     * @return Zaznam
+     */
+    public function setNeobsadeneModulyOperator(int $neobsadeneModulyOperator): self
+    {
+        $this->neobsadeneModulyOperator = $neobsadeneModulyOperator;
+
+        return $this;
+    }
+
+    /**
      * Get zastaveniaFabInfo
      *
      * @return string
@@ -1090,6 +1174,54 @@ class Zaznam
     public function setNedostatokPocet(int $nedostatokPocet): self
     {
         $this->nedostatokPocet = $nedostatokPocet;
+
+        return $this;
+    }
+
+    /**
+     * Get pocetZastaveniInfo
+     *
+     * @return string
+     */
+    public function getPocetZastaveniInfo(): string
+    {
+        return $this->pocetZastaveniInfo;
+    }
+
+    /**
+     * Set pocetZastaveniInfo
+     *
+     * @param string $pocetZastaveniInfo
+     *
+     * @return Zaznam
+     */
+    public function setPocetZastaveniInfo(string $pocetZastaveniInfo): self
+    {
+        $this->pocetZastaveniInfo = $pocetZastaveniInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get pocetZastaveni
+     *
+     * @return int
+     */
+    public function getPocetZastaveni(): int
+    {
+        return $this->pocetZastaveni;
+    }
+
+    /**
+     * Set pocetZastaveni
+     *
+     * @param int $pocetZastaveni
+     *
+     * @return Zaznam
+     */
+    public function setPocetZastaveni(int $pocetZastaveni): self
+    {
+        $this->pocetZastaveni = $pocetZastaveni;
 
         return $this;
     }

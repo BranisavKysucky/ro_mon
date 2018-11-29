@@ -42,8 +42,6 @@ $(() => {
         let jElem = $(e.currentTarget);
         if (jElem.val().length !== 0) {
             nadcas = parseInt(jElem.val());
-        } else {
-            jElem.val(0);
         }
 
         let hodinovka = parseFloat($('#ro').data('hodinova-produkcia'));
@@ -51,10 +49,10 @@ $(() => {
         let maxVyroba = $('#max-vyroba');
         let planVyroby = $('#ciel-vyroba');
 
-        let maxVyroby = Math.round((7.5 + (nadcas / 60)) * hodinovka);
+        let maxVyroby = Math.floor((7.5 + (nadcas / 60)) * hodinovka);
 
         maxVyroba.val(maxVyroby);
-        planVyroby.val(Math.round(maxVyroby * cielRo));
+        planVyroby.val(Math.floor(maxVyroby * cielRo));
 
         calcRo();
     });
@@ -131,19 +129,21 @@ $(() => {
 
                         let nadcas = parseInt($('#nadcas').val());
                         // 7.5 = 7h 30min vyroby
-                        let maxVyroby = Math.round((7.5 + (nadcas / 60)) * data['ciel_hodinova_vyroba']);
+                        let maxVyroby = Math.floor((7.5 + (nadcas / 60)) * data['ciel_hodinova_vyroba']);
                         let cielVyroby = Math.floor(maxVyroby * data['ciel_ro']);
                         let vyrobenych = parseInt($('#pocet-vyrobenych').val());
 
                         $('#max-vyroba').val(maxVyroby);
                         $('#ciel-vyroba').val(cielVyroby);
 
-                        rozdielPlanVyroba.text(vyrobenych - cielVyroby);
-                        if ((vyrobenych - cielVyroby) < 0) {
+                        rozdielPlanVyroba.text(maxVyroby - cielVyroby);
+                        if ((vyrobenych - maxVyroby) < 0) {
                             rozdielPlanVyroba.css({color: 'red'});
                         } else {
                             rozdielPlanVyroba.css({color: 'white'});
                         }
+
+                        calcRo();
                     })
                     .fail(() => {
                         swal({
@@ -163,8 +163,8 @@ $(() => {
     function calcRo() {
         let roCard = $('#ro');
         let roVal = $('#roVal');
+        let efektivitaVal = $('#efektivitaVal');
         let nonRoVal = $('#nonRoVal');
-        let cielVyroba = $('#ciel-vyroba');
         let rozdielPlanVyroba = $('#rozdiel-plan-vyroba');
         let maxVyroba = parseInt($('#max-vyroba').val());
         let vyrobenych = parseInt($('#pocet-vyrobenych').val());
@@ -175,20 +175,52 @@ $(() => {
 
         let ro = vyrobenych / maxVyroba;
         let roCiel = parseFloat(roCard.data('ro-ciel'));
-        let roPerc = Math.round(ro * 100);
+        let roPerc = (ro * 100).toFixed(1);
 
-        roVal.text(roPerc + ' %');
-        nonRoVal.text((100 - roPerc) + ' %');
-        rozdielPlanVyroba.text(vyrobenych - parseInt(cielVyroba.val()));
+        roVal.text(`${roPerc} %`);
+        nonRoVal.text(`${(100 - parseFloat(roPerc)).toFixed(1)} %`);
 
-        rozdielPlanVyroba.css({color: 'black'});
+        let strataNaZastavenia = Math.round(parseInt($('#pocet-zastaveni').val()) * 0.05);
+        let straty = parseInt($('#strata-logistika').val()) + parseInt($('#strata-saturacia').val())
+            + parseInt($('#strata-nedostatok').val()) + strataNaZastavenia;
+
+        let vsetkyStraty = 0;
+        $.each($('input.ro-calc-data'), (i, elem) => {
+            if ($(elem).attr('name') === 'pocet_zastaveni') {
+                vsetkyStraty += Math.round(parseInt($(elem).val()) * 0.05);
+            } else {
+                vsetkyStraty += parseInt($(elem).val());
+            }
+        });
+
+
+        let rozdiel = (vyrobenych - maxVyroba) + vsetkyStraty;
+        rozdielPlanVyroba.text(rozdiel);
+
+        if (rozdiel < 0) {
+            rozdielPlanVyroba.css({color: 'red'});
+        } else {
+            rozdielPlanVyroba.css({color: 'black'});
+        }
+
+        let efektivita = vyrobenych / (maxVyroba - straty);
+        let efektivitaPerc = (efektivita * 100).toFixed(1);
+        let efektivitaCiel = parseFloat(roCard.data('efektivita-ciel'));
+
+        efektivitaVal.text(`${efektivitaPerc} %`);
+
         let cssObj = {color: 'white'};
         if (ro < roCiel) {
             cssObj.color = 'red';
-            rozdielPlanVyroba.css({color: 'red'});
         }
 
         roVal.css(cssObj);
         nonRoVal.css(cssObj);
+
+        if (efektivita < efektivitaCiel) {
+            efektivitaVal.css({color: 'red'});
+        } else {
+            efektivitaVal.css({color: 'white'});
+        }
     }
 });

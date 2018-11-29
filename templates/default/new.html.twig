@@ -18,7 +18,7 @@
             </div>
             <div class="col">
                 <select id="linka_uep" class="selectpicker show-menu-arrow shadow-sm uep search-control"
-                            title="Linka - Uep" name="uep">
+                        title="Linka - Uep" name="uep">
                     <option selected value="-1"></option>
                     {% for data in uepSelectData %}
                         <optgroup label="{{ data[0][0] }}">
@@ -30,7 +30,7 @@
                 </select>
             </div>
             <div class="col">
-                <select id="zmena" class="selectpicker shadow-sm zmena search-control" 
+                <select id="zmena" class="selectpicker shadow-sm zmena search-control"
                         title="Zmena"
                         name="zmena" disabled>
                     <option selected value="-1"></option>
@@ -43,12 +43,13 @@
 
             <div class="col">
                 <input id="nadcas" class="form-control nadcas" title="Nadcas" name="nadcas" placeholder="Nadčas"
-                        disabled/>
+                       disabled/>
+                <i class="far fa-clock" style="position: absolute; right: 5px"></i>
             </div>
 
             <div class="col colBtn">
                 <button class="btn btn-outline-primary shadow-sm myBtn" type="submit">Potvrď
-                </button>                
+                </button>
             </div>
 
 
@@ -73,7 +74,8 @@
                     <div class="riadok">
                         <div class="col-7">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i> Suma
+                                                         data-placement="bottom"
+                                                         title="Celkový počet pracovníkov v GDH"></i> Suma
                                 pracovnikov
                             </div>
                         </div>
@@ -87,7 +89,9 @@
                     <div class="riadok">
                         <div class="col-7">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i> PN +
+                                                         data-placement="bottom"
+                                                         title="Počet pracovníkov kvôli  práce neschopnosti  ,návšteve lekára ,preventívna prehliadka"></i>
+                                PN +
                                 Lekár
                             </div>
                         </div>
@@ -101,7 +105,8 @@
                     <div class="riadok">
                         <div class="col-7">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i>
+                                                         data-placement="bottom"
+                                                         title="Počet pracovníkov ktorý čerpajú dovolenku a náhradne voľno."></i>
                                 Dovolenka + NV
                             </div>
                         </div>
@@ -115,7 +120,9 @@
                     <div class="riadok">
                         <div class="col-7">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i> Suma Iné
+                                                         data-placement="bottom"
+                                                         title="Počet pracovníkov  ktorý neohlásene  neprišli do práce alebo nevydokladovali neprítomnosť v práci (A05)"></i>
+                                Suma Iné
                             </div>
                         </div>
                         <div class="col">
@@ -128,7 +135,9 @@
                     <div class="riadok">
                         <div class="col-7">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i> Školenie
+                                                         data-placement="bottom"
+                                                         title="Počet pracovníkov v školiacom procese+ všetky školenia aj mimo pracoviska"></i>
+                                Školenie
                             </div>
                         </div>
                         <div class="col">
@@ -141,7 +150,9 @@
                     <div class="riadok">
                         <div class="col-7">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i> Požičaný
+                                                         data-placement="bottom"
+                                                         title="Počet pracovníkov požičaných inému sektoru."></i>
+                                Požičaný
                                 (preč)
                             </div>
                         </div>
@@ -155,7 +166,8 @@
                     <div class="riadok">
                         <div class="col-7">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i>
+                                                         data-placement="bottom"
+                                                         title="Počet vypožičaných pracovnikov s iného  sektora."></i>
                                 Vypožičaný
                             </div>
                         </div>
@@ -169,7 +181,9 @@
                     <div class="riadok">
                         <div class="col-7">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i> Nadčas z
+                                                         data-placement="bottom"
+                                                         title="Počet nadčasárov z druhých zmien + Víkendová zmena"></i>
+                                Nadčas z
                                 2 zmeny
                             </div>
                         </div>
@@ -178,6 +192,20 @@
                         </div>
                         <div class="col">
                             <input class="form-control data-in-control" name="nadcas_druha_zmena_operator" disabled/>
+                        </div>
+                    </div>
+                    <div class="riadok">
+                        <div class="col-7">
+                            <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
+                                                         data-placement="bottom" title="Tooltip on bottom"></i> Počet
+                                neobsadených modulov
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input class="form-control data-in-control" name="neobsadene_moduly_monitor" disabled/>
+                        </div>
+                        <div class="col">
+                            <input class="form-control data-in-control" name="neobsadene_moduly_operator" disabled/>
                         </div>
                     </div>
                 </div>
@@ -216,7 +244,8 @@
                                               title="Tooltip on bottom"></i> Počet vyrobených
                         </div>
                         <div class="col-2 text-center">
-                            <input id="pocet-vyrobenych" class="form-control pull-right ro-calc-control data-in-control" name="pocet_vyrobenych" disabled/>
+                            <input id="pocet-vyrobenych" class="form-control pull-right ro-calc-control data-in-control"
+                                   name="pocet_vyrobenych" disabled/>
                             <span id="rozdiel-plan-vyroba" class="small"></span>
                         </div>
                     </div>
@@ -229,10 +258,13 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="zastavenia_fab_pocet" disabled/>
+                            <input class="form-control ro-calc-control ro-calc-data data-in-control"
+                                   name="zastavenia_fab_pocet" disabled/>
+                            <i class="fas fa-car" style="position: absolute; top: 5px; right: 20px;"></i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="zastavenia_fab_info" rows="2" disabled></textarea>
+                            <textarea class="form-control data-in-control" name="zastavenia_fab_info" rows="2"
+                                      disabled></textarea>
                         </div>
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
@@ -240,10 +272,13 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="udrzba_pocet" disabled/>
+                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="udrzba_pocet"
+                                   disabled/>
+                            <i class="fas fa-car" style="position: absolute; top: 5px; right: 20px;"></i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="udrzba_info" rows="2" disabled></textarea>
+                            <textarea class="form-control data-in-control" name="udrzba_info" rows="2"
+                                      disabled></textarea>
                         </div>
                         <div class="col-12"
                              style="border-top: 1px solid #c5c5c5; margin-top: .5rem; padding-top: .5rem;">
@@ -253,10 +288,13 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="logistika_pocet" disabled/>
+                            <input id="strata-logistika" class="form-control ro-calc-control ro-calc-data data-in-control"
+                                   name="logistika_pocet" disabled/>
+                            <i class="fas fa-car" style="position: absolute; top: 5px; right: 20px;"></i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="logistika_info" rows="2" disabled></textarea>
+                            <textarea class="form-control data-in-control" name="logistika_info" rows="2"
+                                      disabled></textarea>
                         </div>
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
@@ -265,10 +303,13 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="saturacia_pocet" disabled/>
+                            <input id="strata-saturacia" class="form-control ro-calc-control ro-calc-data data-in-control"
+                                   name="saturacia_pocet" disabled/>
+                            <i class="fas fa-car" style="position: absolute; top: 5px; right: 20px;"></i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="saturacia_info" rows="2" disabled></textarea>
+                            <textarea class="form-control data-in-control" name="saturacia_info" rows="2"
+                                      disabled></textarea>
                         </div>
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
@@ -277,10 +318,28 @@
                             </div>
                         </div>
                         <div class="col-2" style="margin-bottom: 1rem;">
-                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="nedostatok_pocet" disabled/>
+                            <input id="strata-nedostatok" class="form-control ro-calc-control ro-calc-data data-in-control"
+                                   name="nedostatok_pocet" disabled/>
+                            <i class="fas fa-car" style="position: absolute; top: 5px; right: 20px;"></i>
                         </div>
                         <div class="col-10" style="margin-bottom: 1rem;">
-                            <textarea class="form-control data-in-control" name="nedostatok_info" rows="2" disabled></textarea>
+                            <textarea class="form-control data-in-control" name="nedostatok_info" rows="2"
+                                      disabled></textarea>
+                        </div>
+                        <div class="col-12">
+                            <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
+                                                         data-placement="bottom" title="Tooltip on bottom"></i>
+                                Počet zastavení
+                            </div>
+                        </div>
+                        <div class="col-2" style="margin-bottom: 1rem;">
+                            <input id="pocet-zastaveni" class="form-control ro-calc-control ro-calc-data data-in-control"
+                                   name="pocet_zastaveni" disabled/>
+                            <i class="fas fa-car" style="position: absolute; top: 5px; right: 20px;"></i>
+                        </div>
+                        <div class="col-10" style="margin-bottom: 1rem;">
+                            <textarea class="form-control data-in-control" name="pocet_zastaveni_info" rows="2"
+                                      disabled></textarea>
                         </div>
                     </div>
                 </div>

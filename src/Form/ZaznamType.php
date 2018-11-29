@@ -38,6 +38,8 @@ class ZaznamType extends AbstractType
                 ->add('vypozicany_operator', NumberType::class)
                 ->add('nadcas_druha_zmena_monitor', NumberType::class)
                 ->add('nadcas_druha_zmena_operator', NumberType::class)
+                ->add('neobsadene_moduly_monitor', NumberType::class)
+                ->add('neobsadene_moduly_operator', NumberType::class)
                 ->add('zastavenia_fab_info', TextType::class, ['empty_data' => ''])
                 ->add('zastavenia_fab_pocet', NumberType::class)
                 ->add('udrzba_info', TextType::class, ['empty_data' => ''])
@@ -47,7 +49,9 @@ class ZaznamType extends AbstractType
                 ->add('saturacia_info', TextType::class, ['empty_data' => ''])
                 ->add('saturacia_pocet', NumberType::class)
                 ->add('nedostatok_info', TextType::class, ['empty_data' => ''])
-                ->add('nedostatok_pocet', NumberType::class);
+                ->add('nedostatok_pocet', NumberType::class)
+                ->add('pocet_zastaveni_info', TextType::class, ['empty_data' => ''])
+                ->add('pocet_zastaveni', NumberType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
