@@ -14,10 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class ApiController extends AbstractController
 {
     /**
-     * @Route(path="/api", name="api_action")
+     * @Route(path="/api", methods={"GET"}, name="api_action")
      *
      * @param EntityManagerInterface $em
      *
@@ -25,6 +26,19 @@ class ApiController extends AbstractController
      */
     public function apiAction(EntityManagerInterface $em)
     {
-        return new JsonResponse(['ok' => true]);
+
+        /** @var Zaznam[] $zaznamy */
+        $zaznamy = $this->getDoctrine()->getRepository('App:Zaznam')->findAll();
+        $uep = $this->getDoctrine()->getRepository('App:Uep')->findAll();
+        $zaznamyArr = [];
+        foreach ($zaznamy as $zaznam) {
+        $zaznamyArr[] = $zaznam->toArray();
+    }
+
+        return new JsonResponse($zaznamyArr);
+
+
+
+//        return new JsonResponse(['ok' => true]);
     }
 }

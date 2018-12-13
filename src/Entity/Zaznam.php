@@ -1225,4 +1225,57 @@ class Zaznam
 
         return $this;
     }
+
+
+
+    public function toArray(): array
+    {
+        return [
+            'nadcas' => $this->nadcas,
+            'suma_pracovnikov_m' => $this->sumaPracovnikovMonitor,
+            'suma_pracovnikov_o' => $this->sumaPracovnikovOperator,
+            'pn_lekar_m' => $this->pnLekarMonitor,
+            'pn_lekar_o' => $this->pnLekarOperator,
+            'dovolenka_nv_m' => $this->dovolenkaNvMonitor,
+            'dovolenka_nv_o' => $this->dovolenkaNvOperator,
+            'ine_m' => $this->ineMonitor,
+            'ine_o' => $this->ineOperator,
+            'skolenie_m' => $this->skolenieMonitor,
+            'skolenie_o' => $this->skolenieOperator,
+            'pozicany_m' => $this->pozicanyMonitor,
+            'pozicany_o' => $this->pozicanyOperator,
+            'vypozicany_m' => $this->vypozicanyMonitor,
+            'vypozicany_o' => $this->vypozicanyOperator,
+            'nadcas_2_zmeny_m' => $this->nadcasDruhaZmenaMonitor,
+            'nadcas_2_zmeny_o' => $this->nadcasDruhaZmenaOperator,
+            'zastavenia_text_f' => $this->zastaveniaFabInfo,
+            'zastavenia_int_f' => $this->zastaveniaFabPocet,
+            'udrzba_t' => $this->udrzbaInfo,
+            'udrzba_i' => $this->udrzbaPocet,
+            'logistika_t' => $this->logistikaInfo ,
+            'logistika_i' => $this->logistikaPocet,
+            'saturacia_t' => $this->saturaciaInfo ,
+            'saturacia_i' => $this->saturaciaPocet,
+            'nedostatok_t' => $this->nedostatokInfo,
+            'nedostatok_i' => $this->nedostatokPocet,
+            'uep' => $this->uep->getNazov(),
+            'linka' => $this->uep->getLinka()->getNazov(),
+        ];
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
