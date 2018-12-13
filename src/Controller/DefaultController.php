@@ -3,12 +3,14 @@ namespace App\Controller;
 
 use App\Entity\Zaznam;
 use Doctrine\ORM\EntityManagerInterface;
+//use http\Env\Response;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController ;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request ;
 use App\Form\ZaznamType;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response ;
 
 class DefaultController extends AbstractController
 {
@@ -42,6 +44,8 @@ return $this->render('default/new.html.twig', [
         $zaznamData = new Zaznam();
         $form = $this->createForm(ZaznamType::class, $zaznamData);
         $form->handleRequest($request);
+
+        // toto je len podmienka na overenie ci sa to tam nachadza
 
         if ($form->isSubmitted() && $form->isValid()) {
             $zaznam->setNadcas($zaznamData->getNadcas());
@@ -119,6 +123,43 @@ return $this->render('default/new.html.twig', [
             ]);
         }
     }
+
+
+    //json
+
+
+    /**
+     * @Route ("/api",methods={"GET"}, name="linka_api")
+     */
+    public function jsonresponseAction () {
+
+        // pre lepsie rozoznanie php stormu s pracou s polami, same mi napr. doplna nejake hodnoty
+        /** @var Zaznam[] $zaznamy */
+        //$zaznamy to je entita
+        $zaznamy = $this->getDoctrine()->getRepository('App:Zaznam')->findAll();
+        // vytvori docasne pole
+        $zaznamyArr = [];
+        //nieco ako cyklus for len s tym rozdielom ze vrati tolko zaznamov kolko je prvkov, vyuziva sa pri poliach
+        // u ktorych neviem povedat presny pocet
+        foreach ($zaznamy as $zaznam) {
+            // objekt sme prehodili na pole
+            $zaznamyArr[] = $zaznam->toArray();
+        }
+        //vytvori Jsonresponse - toto je skratka dolneho zapisu
+        return new JsonResponse($zaznamyArr);
+
+        // ked si zobrazim svoju stranku tak data su rozhadzane, dobre je preto si nainstalovat rozsirenie
+        // pre svoj prehliadac, vola sa JSON Lite, kt. zobrazeny tie data ucelene...
+
+    }
+
+//// vytvori Json response
+//    $response = new Response(json_encode($data), 200);
+//    $response->headers->set('Content-Type', 'application/json');
+//    return $response;
+
+
+
 
 }
 

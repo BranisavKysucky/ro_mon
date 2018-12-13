@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+// tento ajax sluzi na update
     $('#horna-tab-form').submit(function (e) {
         e.preventDefault();
 
@@ -71,7 +71,7 @@ $(document).ready(function () {
 
         console.log(mojeData);
 
-
+// tento sluzi na zobrazenie dat
         $.ajax({
             method: "POST",
             url: "/getData",
@@ -80,7 +80,7 @@ $(document).ready(function () {
             .done(function( data ) {
                 $('#horna-tab-form').data('zaznam-id', data.zaznamId);
 
-                // vypise do consoli aktualnu hodnotu datoveho parametra formulara horna-tab-form, tj data-zaznam-id
+                // vypise do konsoly aktualnu hodnotu datoveho parametra formulara horna-tab-form, tj data-zaznam-id
                 console.log($('#horna-tab-form').data('zaznam-id'));
 
                 $('#nadcas').val(data.zaznamData.nadcas);
