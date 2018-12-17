@@ -44,7 +44,7 @@
             <div class="col">
                 <input id="nadcas" class="form-control nadcas" title="Nadcas" name="nadcas" placeholder="Nadčas"
                        disabled/>
-                <i class="far fa-clock" style="position: absolute; right: 5px"></i>
+                <i class="far fa-clock" style="position: absolute; top: 1.5rem; right: 5px"></i>
             </div>
 
             <div class="col colBtn">
@@ -183,8 +183,7 @@
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
                                                          data-placement="bottom"
                                                          title="Počet nadčasárov z druhých zmien + Víkendová zmena"></i>
-                                Nadčas z
-                                2 zmeny
+                                Nadčas z 2 zmeny <sup><small><i class="far fa-clock"></i></small></sup>
                             </div>
                         </div>
                         <div class="col">
@@ -198,15 +197,13 @@
                         <div class="col-7">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
                                                          data-placement="bottom" title="Tooltip on bottom"></i> Počet
-                                neobsadených modulov
+                                neobsadených modulov <sup><small id="moduly-monitora-text"></small></sup>
                             </div>
                         </div>
                         <div class="col">
                             <input class="form-control data-in-control" name="neobsadene_moduly_monitor" disabled/>
                         </div>
-                        <div class="col">
-                            <input class="form-control data-in-control" name="neobsadene_moduly_operator" disabled/>
-                        </div>
+                        <div class="col"></div>
                     </div>
                 </div>
             </div>
@@ -253,7 +250,7 @@
                         <div class="col-12"
                              style="border-top: 1px solid #c5c5c5; margin-top: .5rem; padding-top: .5rem;">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i>
+                                                         data-placement="bottom" title="Zapísať všetky zastavenia v minútach spôsobene Andonom (operátorom) + všetky zastavenia ktoré priamo spôsobilo dane UEP napr. zastavenie linky z dôvodu nečistôt na zariadení, omylom stlačene núdzové tlačidlo na zastavenie výroby atď."></i>
                                 Zastavenia FAB
                             </div>
                         </div>
@@ -268,7 +265,7 @@
                         </div>
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i> Údržba
+                                                         data-placement="bottom" title="Zapísať všetky zastavenia v minútach spôsobene údržbou to znamená porucha na zariadení, poškodené zariadenie, nefunkčne zariadenie (manipulátor, uťahovačka, prekládka, plničky atď.)"></i> Údržba
                             </div>
                         </div>
                         <div class="col-2">
@@ -283,7 +280,7 @@
                         <div class="col-12"
                              style="border-top: 1px solid #c5c5c5; margin-top: .5rem; padding-top: .5rem;">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i>
+                                                         data-placement="bottom" title=" Zapísať všetky zastavenia v minútach spôsobené logistikou napr. chýbajúci diel, zamenený diel, poškodený diel, atď."></i>
                                 Logistika
                             </div>
                         </div>
@@ -298,7 +295,7 @@
                         </div>
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i>
+                                                         data-placement="bottom" title="Zapísať všetky zastavenia v minútach spôsobené zastavenie mojej linky z dôvodu linky predo mnou (plný zásobník, Andon linky predo mnou atď.)."></i>
                                 Saturácia
                             </div>
                         </div>
@@ -313,7 +310,7 @@
                         </div>
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i>
+                                                         data-placement="bottom" title="Zapísať všetky zastavenia v autách spôsobene zastavenie mojej linky z dôvodu prázdneho zásobníka napr. chýbajúcich (karosérii. závesov , kitovacich vozíkov atď.) z predchádzajúcej linky"></i>
                                 Nedostatok
                             </div>
                         </div>
@@ -328,7 +325,7 @@
                         </div>
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
-                                                         data-placement="bottom" title="Tooltip on bottom"></i>
+                                                         data-placement="bottom" title="Zapísať počet všetkých zastavení na linke. Zdroj syntéza andon."></i>
                                 Počet zastavení
                             </div>
                         </div>

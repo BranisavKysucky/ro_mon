@@ -42,6 +42,15 @@ class Uep
     private $linka;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     *
+     * @Serializer\Groups({"zaznam"})
+     */
+    private $pocetModulovMonitor;
+
+    /**
      * Get id
      *
      * @return int
@@ -95,6 +104,30 @@ class Uep
     public function setLinka(Linka $linka): self
     {
         $this->linka = $linka;
+
+        return $this;
+    }
+
+    /**
+     * Get pocetModulovMonitor
+     *
+     * @return int
+     */
+    public function getPocetModulovMonitor(): int
+    {
+        return $this->pocetModulovMonitor;
+    }
+
+    /**
+     * Set pocetModulovMonitor
+     *
+     * @param int $pocetModulovMonitor
+     *
+     * @return Uep
+     */
+    public function setPocetModulovMonitor(int $pocetModulovMonitor): self
+    {
+        $this->pocetModulovMonitor = $pocetModulovMonitor;
 
         return $this;
     }

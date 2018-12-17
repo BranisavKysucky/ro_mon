@@ -205,22 +205,22 @@ class Zaznam
     private $vypozicanyOperator = 0;
 
     /**
-     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     * @ORM\Column(type="float", options={"unsigned":true, "default":0})
      *
      * @Serializer\Groups({"zaznam"})
      *
-     * @var integer
+     * @var float
      */
-    private $nadcasDruhaZmenaMonitor = 0;
+    private $nadcasDruhaZmenaMonitor = 0.0;
 
     /**
-     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     * @ORM\Column(type="float", options={"unsigned":true, "default":0})
      *
      * @Serializer\Groups({"zaznam"})
      *
-     * @var integer
+     * @var float
      */
-    private $nadcasDruhaZmenaOperator = 0;
+    private $nadcasDruhaZmenaOperator = 0.0;
 
     /**
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
@@ -230,15 +230,6 @@ class Zaznam
      * @var integer
      */
     private $neobsadeneModulyMonitor = 0;
-
-    /**
-     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
-     *
-     * @Serializer\Groups({"zaznam"})
-     *
-     * @var integer
-     */
-    private $neobsadeneModulyOperator = 0;
 
     /**
      * @ORM\Column(type="text", options={"default":""})
@@ -845,9 +836,9 @@ class Zaznam
     /**
      * Get nadcasDruhaZmenaMonitor
      *
-     * @return int
+     * @return float
      */
-    public function getNadcasDruhaZmenaMonitor(): int
+    public function getNadcasDruhaZmenaMonitor(): float
     {
         return $this->nadcasDruhaZmenaMonitor;
     }
@@ -855,11 +846,11 @@ class Zaznam
     /**
      * Set nadcasDruhaZmenaMonitor
      *
-     * @param int $nadcasDruhaZmenaMonitor
+     * @param float $nadcasDruhaZmenaMonitor
      *
      * @return Zaznam
      */
-    public function setNadcasDruhaZmenaMonitor(int $nadcasDruhaZmenaMonitor): self
+    public function setNadcasDruhaZmenaMonitor(float $nadcasDruhaZmenaMonitor): self
     {
         $this->nadcasDruhaZmenaMonitor = $nadcasDruhaZmenaMonitor;
 
@@ -869,9 +860,9 @@ class Zaznam
     /**
      * Get nadcasDruhaZmenaOperator
      *
-     * @return int
+     * @return float
      */
-    public function getNadcasDruhaZmenaOperator(): int
+    public function getNadcasDruhaZmenaOperator(): float
     {
         return $this->nadcasDruhaZmenaOperator;
     }
@@ -879,11 +870,11 @@ class Zaznam
     /**
      * Set nadcasDruhaZmenaOperator
      *
-     * @param int $nadcasDruhaZmenaOperator
+     * @param float $nadcasDruhaZmenaOperator
      *
      * @return Zaznam
      */
-    public function setNadcasDruhaZmenaOperator(int $nadcasDruhaZmenaOperator): self
+    public function setNadcasDruhaZmenaOperator(float $nadcasDruhaZmenaOperator): self
     {
         $this->nadcasDruhaZmenaOperator = $nadcasDruhaZmenaOperator;
 
@@ -910,30 +901,6 @@ class Zaznam
     public function setNeobsadeneModulyMonitor(int $neobsadeneModulyMonitor): self
     {
         $this->neobsadeneModulyMonitor = $neobsadeneModulyMonitor;
-
-        return $this;
-    }
-
-    /**
-     * Get neobsadeneModulyOperator
-     *
-     * @return int
-     */
-    public function getNeobsadeneModulyOperator(): int
-    {
-        return $this->neobsadeneModulyOperator;
-    }
-
-    /**
-     * Set neobsadeneModulyOperator
-     *
-     * @param int $neobsadeneModulyOperator
-     *
-     * @return Zaznam
-     */
-    public function setNeobsadeneModulyOperator(int $neobsadeneModulyOperator): self
-    {
-        $this->neobsadeneModulyOperator = $neobsadeneModulyOperator;
 
         return $this;
     }

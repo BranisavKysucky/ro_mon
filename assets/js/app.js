@@ -114,6 +114,8 @@ $(() => {
                         ctrl.val(value);
                     }
                 });
+
+                $('#moduly-monitora-text').text(`[${data.uep.pocet_modulov_monitor}]`);
             })
             .then(() => {
                 let uepId = $('select[name="uep"]').val();

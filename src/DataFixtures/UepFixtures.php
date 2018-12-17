@@ -22,21 +22,21 @@ class UepFixtures extends BaseFixture implements DependentFixtureInterface
         $log = $this->getReference(Linka::class.'_2');
 
         $data = [
-            ['HC0', $hc],
-            ['HC1', $hc],
-            ['HC2', $hc],
-            ['GA', $hc],
-            ['PdB', $hc],
-            ['PP', $hc],
-            ['KTP', $hc],
-            ['HC3', $mv],
-            ['MV1', $mv],
-            ['MV2', $mv],
-            ['MV3', $mv],
-            ['MV4', $mv],
-            ['PM', $mv],
-            ['LOG 1', $log],
-            ['LOG 2', $log],
+            ['HC0', $hc, 3],
+            ['HC1', $hc, 3],
+            ['HC2', $hc, 3],
+            ['GA', $hc, 4],
+            ['PdB', $hc, 2],
+            ['PP', $hc, 4],
+            ['KTP', $hc, 3],
+            ['HC3', $mv, 3],
+            ['MV1', $mv, 4],
+            ['MV2', $mv, 3],
+            ['MV3', $mv, 3],
+            ['MV4', $mv, 2],
+            ['PM', $mv, 3],
+            ['LOG 1', $log, 3],
+            ['LOG 2', $log, 3],
         ];
 
         $this->createMany(
@@ -44,7 +44,8 @@ class UepFixtures extends BaseFixture implements DependentFixtureInterface
             count($data),
             function (Uep $uep, int $i) use ($data) {
                 $uep->setNazov($data[$i][0])
-                    ->setLinka($data[$i][1]);
+                    ->setLinka($data[$i][1])
+                    ->setPocetModulovMonitor($data[$i][2]);
             }
         );
 

@@ -39,7 +39,6 @@ class ZaznamType extends AbstractType
                 ->add('nadcas_druha_zmena_monitor', NumberType::class)
                 ->add('nadcas_druha_zmena_operator', NumberType::class)
                 ->add('neobsadene_moduly_monitor', NumberType::class)
-                ->add('neobsadene_moduly_operator', NumberType::class)
                 ->add('zastavenia_fab_info', TextType::class, ['empty_data' => ''])
                 ->add('zastavenia_fab_pocet', NumberType::class)
                 ->add('udrzba_info', TextType::class, ['empty_data' => ''])
