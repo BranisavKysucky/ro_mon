@@ -26,6 +26,7 @@ class Zaznam
     /**
      * @ORM\Column(type="datetime", nullable=true)
      *
+     * @Serializer\Type("DateTime<'d/m/Y H:i'>")
      * @Serializer\Groups({"zaznam"})
      *
      * @var \DateTime|null
@@ -35,6 +36,7 @@ class Zaznam
     /**
      * @ORM\Column(type="date")
      *
+     * @Serializer\Type("DateTime<'d/m/Y'>")
      * @Serializer\Groups({"zaznam"})
      *
      * @var \DateTime

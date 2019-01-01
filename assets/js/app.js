@@ -108,9 +108,9 @@ $(() => {
                 form.data('zaznam-id', data.id);
 
                 $.each(data, function (key, value) {
-                    let ctrl = $('input[name=' + key + ']', form);
+                    let ctrl = $(`input[name='${key}'], textarea[name='${key}']`, form);
 
-                    if (ctrl !== undefined) {
+                    if (ctrl.length !== 0) {
                         ctrl.val(value);
                     }
                 });
@@ -138,7 +138,7 @@ $(() => {
                         $('#max-vyroba').val(maxVyroby);
                         $('#ciel-vyroba').val(cielVyroby);
 
-                        rozdielPlanVyroba.text(maxVyroby - cielVyroby);
+                        rozdielPlanVyroba.text('Neznáme: ' + (maxVyroby - cielVyroby));
                         if ((vyrobenych - maxVyroby) < 0) {
                             rozdielPlanVyroba.css({color: 'red'});
                         } else {
@@ -182,10 +182,6 @@ $(() => {
         roVal.text(`${roPerc} %`);
         nonRoVal.text(`${(100 - parseFloat(roPerc)).toFixed(1)} %`);
 
-        let strataNaZastavenia = Math.round(parseInt($('#pocet-zastaveni').val()) * 0.05);
-        let straty = parseInt($('#strata-logistika').val()) + parseInt($('#strata-saturacia').val())
-            + parseInt($('#strata-nedostatok').val()) + strataNaZastavenia;
-
         let vsetkyStraty = 0;
         $.each($('input.ro-calc-data'), (i, elem) => {
             if ($(elem).attr('name') === 'pocet_zastaveni') {
@@ -197,13 +193,21 @@ $(() => {
 
 
         let rozdiel = (vyrobenych - maxVyroba) + vsetkyStraty;
-        rozdielPlanVyroba.text(rozdiel);
+        rozdielPlanVyroba.text('Neznáme: ' + rozdiel);
 
         if (rozdiel < 0) {
             rozdielPlanVyroba.css({color: 'red'});
         } else {
             rozdielPlanVyroba.css({color: 'black'});
         }
+
+
+        let hodinovka = parseFloat($('#ro').data('hodinova-produkcia'));
+        let autaZaSekundu = hodinovka / 3600;
+
+        let strataNaZastavenia = Math.round((parseInt($('#pocet-zastaveni').val()) * 3) * autaZaSekundu); // 3s == 0.05
+        let straty = parseInt($('#strata-logistika').val()) + parseInt($('#strata-saturacia').val())
+            + parseInt($('#strata-nedostatok').val()) + strataNaZastavenia;
 
         let efektivita = vyrobenych / (maxVyroba - straty);
         let efektivitaPerc = (efektivita * 100).toFixed(1);
