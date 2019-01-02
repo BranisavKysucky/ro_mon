@@ -206,6 +206,10 @@ $(() => {
         let autaZaSekundu = hodinovka / 3600;
 
         let strataNaZastavenia = Math.round((parseInt($('#pocet-zastaveni').val()) * 3) * autaZaSekundu); // 3s == 0.05
+        if (!isNaN(strataNaZastavenia)) {
+            $('#zastavenia-na-auta').text(strataNaZastavenia);
+        }
+
         let straty = parseInt($('#strata-logistika').val()) + parseInt($('#strata-saturacia').val())
             + parseInt($('#strata-nedostatok').val()) + strataNaZastavenia;
 

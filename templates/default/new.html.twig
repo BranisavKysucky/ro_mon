@@ -211,15 +211,21 @@
                 <div class="row karta" id="kartaRO">
                     <h2 class="no-selection"><i class="fas fa-tachometer-alt"></i> RO</h2>
                     <div style="display: inherit; margin-right: 1rem; text-align: center;">
-                        <div class="ro-title-value-item" style="margin-right: .5rem;">
+                        <div class="ro-title-value-item" style="margin-right: .5rem;" data-toggle="tooltip"
+                             data-placement="bottom"
+                             title="Efektivita = Počet vyrobených áut / [ Teoretická výroba - Logistika - Saturácia - Nedostatok - (Počet zastavení * 3s * (Hodinový cieľ / 3600)) ]">
                             <h6 class="no-selection">Efektivita</h6>
                             <span id="efektivitaVal" class="ro-title-values no-selection">0 %</span>
                         </div>
-                        <div class="ro-title-value-item" style="margin-right: .5rem;">
+                        <div class="ro-title-value-item" style="margin-right: .5rem;" data-toggle="tooltip"
+                             data-placement="bottom"
+                             title="RO = Počet vyrobených áut / Teoretická výroba">
                             <h6 class="no-selection">RO</h6>
                             <span id="roVal" class="ro-title-values no-selection">0 %</span>
                         </div>
-                        <div class="ro-title-value-item">
+                        <div class="ro-title-value-item" data-toggle="tooltip"
+                             data-placement="bottom"
+                             title="Non RO = 100% - RO[%]">
                             <h6 class="no-selection">Non RO</h6>
                             <span id="nonRoVal" class="ro-title-values no-selection">0 %</span>
                         </div>
@@ -326,7 +332,7 @@
                         <div class="col-12">
                             <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
                                                          data-placement="bottom" title="Zapísať počet všetkých zastavení na linke. Zdroj syntéza andon."></i>
-                                Počet zastavení
+                                Počet zastavení <small>(Zastavenia * 3[s] * (Hodinový cieľ / 3600) = <span id="zastavenia-na-auta"></span> [auto])</small>
                             </div>
                         </div>
                         <div class="col-2" style="margin-bottom: 1rem;">
