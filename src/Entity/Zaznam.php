@@ -72,6 +72,33 @@ class Zaznam
     private $uep;
 
     /**
+     * @ORM\Column(type="float", options={"unsigned":true})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var float
+     */
+    private $cielHodinovaVyroba;
+
+    /**
+     * @ORM\Column(type="float", options={"unsigned":true})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var float
+     */
+    private $cielRo;
+
+    /**
+     * @ORM\Column(type="float", options={"unsigned":true})
+     *
+     * @Serializer\Groups({"zaznam"})
+     *
+     * @var float
+     */
+    private $cielEfektivita;
+
+    /**
      * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      *
      * @Serializer\Groups({"zaznam"})
@@ -471,6 +498,78 @@ class Zaznam
     public function setUep(Uep $uep): self
     {
         $this->uep = $uep;
+
+        return $this;
+    }
+
+    /**
+     * Get cielHodinovaVyroba
+     *
+     * @return float
+     */
+    public function getCielHodinovaVyroba(): float
+    {
+        return $this->cielHodinovaVyroba;
+    }
+
+    /**
+     * Set cielHodinovaVyroba
+     *
+     * @param float $cielHodinovaVyroba
+     *
+     * @return Zaznam
+     */
+    public function setCielHodinovaVyroba(float $cielHodinovaVyroba): self
+    {
+        $this->cielHodinovaVyroba = $cielHodinovaVyroba;
+
+        return $this;
+    }
+
+    /**
+     * Get cielRo
+     *
+     * @return float
+     */
+    public function getCielRo(): float
+    {
+        return $this->cielRo;
+    }
+
+    /**
+     * Set cielRo
+     *
+     * @param float $cielRo
+     *
+     * @return Zaznam
+     */
+    public function setCielRo(float $cielRo): self
+    {
+        $this->cielRo = $cielRo;
+
+        return $this;
+    }
+
+    /**
+     * Get cielEfektivita
+     *
+     * @return float
+     */
+    public function getCielEfektivita(): float
+    {
+        return $this->cielEfektivita;
+    }
+
+    /**
+     * Set cielEfektivita
+     *
+     * @param float $cielEfektivita
+     *
+     * @return Zaznam
+     */
+    public function setCielEfektivita(float $cielEfektivita): self
+    {
+        $this->cielEfektivita = $cielEfektivita;
 
         return $this;
     }

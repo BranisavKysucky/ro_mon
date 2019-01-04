@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Ciel;
 use App\Entity\Linka;
 use App\Entity\Uep;
 use App\Entity\Zaznam;
@@ -109,6 +110,17 @@ class DefaultController extends AbstractController
                    ->setUep($uep)
                    ->setZmena($zmena);
 
+            /** @var Ciel[] $ciele */
+            $ciele = $em->getRepository(Ciel::class)->findBy(['uep' => $uep], ['platnostOd' => 'DESC'], 1);
+            if (empty($ciele)) {
+                $zaznam->setCielHodinovaVyroba(0)->setCielEfektivita(0)->setCielRo(0);
+            } else {
+                $ciel = $ciele[0];
+                $zaznam->setCielHodinovaVyroba($ciel->getCielHodinovaVyroba())
+                       ->setCielEfektivita($ciel->getCielEfektivita())
+                       ->setCielRo($ciel->getCielRo());
+            }
+
             $em->persist($zaznam);
             $em->flush();
         }
@@ -130,14 +142,14 @@ class DefaultController extends AbstractController
     public function getCielAction(Uep $uep, EntityManagerInterface $em, SerializerInterface $serializer)
     {
         try {
-            $ciel  = $em->createQueryBuilder()->select('c')
-                        ->from('App:Ciel', 'c')
-                        ->where('c.uep = ?1')
-                        ->orderBy('c.platnostOd', 'DESC')
-                        ->setMaxResults(1)
-                        ->setParameter(1, $uep)
-                        ->getQuery()
-                        ->getSingleResult();
+            $ciel = $em->createQueryBuilder()->select('c')
+                       ->from('App:Ciel', 'c')
+                       ->where('c.uep = ?1')
+                       ->orderBy('c.platnostOd', 'DESC')
+                       ->setMaxResults(1)
+                       ->setParameter(1, $uep)
+                       ->getQuery()
+                       ->getSingleResult();
 
             $data = $serializer->serialize($ciel, 'json', SerializationContext::create()->setGroups(['zaznam']));
 
@@ -147,22 +159,5 @@ class DefaultController extends AbstractController
         } catch (NonUniqueResultException $e) {
             return new JsonResponse(['msg' => 'Nájdených viacero cieľov pre danú linku!'], Response::HTTP_BAD_REQUEST);
         }
-    }
-
-    /**
-     * @Route(path="/test", methods={"GET"}, name="test_action")
-     *
-     * @param EntityManagerInterface $em
-     *
-     * @return Response
-     */
-    public function testAction(EntityManagerInterface $em, SerializerInterface $serializer)
-    {
-        /** @var Zaznam $zaznam */
-        $zaznam = $em->getRepository(Zaznam::class)->find(1);
-
-        $json = $serializer->serialize($zaznam, 'json', SerializationContext::create()->setGroups(['zaznam']));
-
-        return new Response($json, 200, ['Content-Type' => 'application/json']);
     }
 }
