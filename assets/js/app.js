@@ -170,6 +170,8 @@ $(() => {
         let rozdielPlanVyroba = $('#rozdiel-plan-vyroba');
         let maxVyroba = parseInt($('#max-vyroba').val());
         let vyrobenych = parseInt($('#pocet-vyrobenych').val());
+        let hodinovka = parseFloat($('#ro').data('hodinova-produkcia'));
+        let autaZaMinutu = hodinovka / 60;
 
         if (isNaN(vyrobenych) || isNaN(maxVyroba)) {
             return;
@@ -185,12 +187,13 @@ $(() => {
         let vsetkyStraty = 0;
         $.each($('input.ro-calc-data'), (i, elem) => {
             if ($(elem).attr('name') === 'pocet_zastaveni') {
-                vsetkyStraty += Math.round(parseInt($(elem).val()) * 0.05);
+                vsetkyStraty += (parseInt($(elem).val()) * 0.05 * autaZaMinutu); // 3s == 0.05
             } else {
-                vsetkyStraty += parseInt($(elem).val());
+                vsetkyStraty += (parseInt($(elem).val()) * autaZaMinutu);
             }
         });
 
+        vsetkyStraty = Math.floor(vsetkyStraty);
 
         let rozdiel = (vyrobenych - maxVyroba) + vsetkyStraty;
         rozdielPlanVyroba.text('Neznáme: ' + rozdiel);
@@ -202,16 +205,17 @@ $(() => {
         }
 
 
-        let hodinovka = parseFloat($('#ro').data('hodinova-produkcia'));
-        let autaZaSekundu = hodinovka / 3600;
+        let strataNaZastavenia = parseInt($('#pocet-zastaveni').val()) * 0.05 * autaZaMinutu; // 3s == 0.05
 
-        let strataNaZastavenia = Math.round((parseInt($('#pocet-zastaveni').val()) * 3) * autaZaSekundu); // 3s == 0.05
         if (!isNaN(strataNaZastavenia)) {
-            $('#zastavenia-na-auta').text(strataNaZastavenia);
+            $('#zastavenia-na-auta').text(Math.round(strataNaZastavenia));
         }
 
-        let straty = parseInt($('#strata-logistika').val()) + parseInt($('#strata-saturacia').val())
-            + parseInt($('#strata-nedostatok').val()) + strataNaZastavenia;
+        let strataLogistikaAuta = parseInt($('#strata-logistika').val()) * autaZaMinutu;
+        let strataSaturaciaAuta = parseInt($('#strata-saturacia').val()) * autaZaMinutu;
+        let strataNedostatokAuta = parseInt($('#strata-nedostatok').val()) * autaZaMinutu;
+
+        let straty = Math.floor(strataLogistikaAuta + strataSaturaciaAuta + strataNedostatokAuta + strataNaZastavenia);
 
         let efektivita = vyrobenych / (maxVyroba - straty);
         let efektivitaPerc = (efektivita * 100).toFixed(1);
