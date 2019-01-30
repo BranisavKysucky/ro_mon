@@ -131,8 +131,8 @@ $(() => {
 
                         let nadcas = parseInt($('#nadcas').val());
                         // 7.5 = 7h 30min vyroby
-                        let maxVyroby = Math.floor((7.5 + (nadcas / 60)) * data['ciel_hodinova_vyroba']);
-                        let cielVyroby = Math.floor(maxVyroby * data['ciel_ro']);
+                        let maxVyroby = Math.round((7.5 + (nadcas / 60)) * data['ciel_hodinova_vyroba']);
+                        let cielVyroby = Math.round(maxVyroby * data['ciel_ro']);
                         let vyrobenych = parseInt($('#pocet-vyrobenych').val());
 
                         $('#max-vyroba').val(maxVyroby);
