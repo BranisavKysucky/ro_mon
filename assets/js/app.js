@@ -167,7 +167,7 @@ $(() => {
         let roVal = $('#roVal');
         let efektivitaVal = $('#efektivitaVal');
         let nonRoVal = $('#nonRoVal');
-        let rozdielPlanVyroba = $('#rozdiel-plan-vyroba');
+        // let rozdielPlanVyroba = $('#rozdiel-plan-vyroba');
         let maxVyroba = parseInt($('#max-vyroba').val());
         let vyrobenych = parseInt($('#pocet-vyrobenych').val());
         let hodinovka = parseFloat($('#ro').data('hodinova-produkcia'));
@@ -184,25 +184,25 @@ $(() => {
         roVal.text(`${roPerc} %`);
         nonRoVal.text(`${(100 - parseFloat(roPerc)).toFixed(1)} %`);
 
-        let vsetkyStraty = 0;
-        $.each($('input.ro-calc-data'), (i, elem) => {
-            if ($(elem).attr('name') === 'pocet_zastaveni') {
-                vsetkyStraty += (parseInt($(elem).val()) * 0.05 * autaZaMinutu); // 3s == 0.05
-            } else {
-                vsetkyStraty += (parseInt($(elem).val()) * autaZaMinutu);
-            }
-        });
-
-        vsetkyStraty = Math.floor(vsetkyStraty);
-
-        let rozdiel = (vyrobenych - maxVyroba) + vsetkyStraty;
-        rozdielPlanVyroba.text('Neznáme: ' + rozdiel);
-
-        if (rozdiel < 0) {
-            rozdielPlanVyroba.css({color: 'red'});
-        } else {
-            rozdielPlanVyroba.css({color: 'black'});
-        }
+        // let vsetkyStraty = 0;
+        // $.each($('input.ro-calc-data'), (i, elem) => {
+        //     if ($(elem).attr('name') === 'pocet_zastaveni') {
+        //         vsetkyStraty += (parseInt($(elem).val()) * 0.05 * autaZaMinutu); // 3s == 0.05
+        //     } else {
+        //         vsetkyStraty += (parseInt($(elem).val()) * autaZaMinutu);
+        //     }
+        // });
+        //
+        // vsetkyStraty = Math.floor(vsetkyStraty);
+        //
+        // let rozdiel = (vyrobenych - maxVyroba) + vsetkyStraty;
+        // rozdielPlanVyroba.text('Neznáme: ' + rozdiel);
+        //
+        // if (rozdiel < 0) {
+        //     rozdielPlanVyroba.css({color: 'red'});
+        // } else {
+        //     rozdielPlanVyroba.css({color: 'black'});
+        // }
 
 
         let strataNaZastavenia = parseInt($('#pocet-zastaveni').val()) * 0.05 * autaZaMinutu; // 3s == 0.05
@@ -215,7 +215,8 @@ $(() => {
         let strataSaturaciaAuta = parseInt($('#strata-saturacia').val()) * autaZaMinutu;
         let strataNedostatokAuta = parseInt($('#strata-nedostatok').val()) * autaZaMinutu;
 
-        let straty = Math.floor(strataLogistikaAuta + strataSaturaciaAuta + strataNedostatokAuta + strataNaZastavenia);
+        // let straty = Math.floor(strataLogistikaAuta + strataSaturaciaAuta + strataNedostatokAuta + strataNaZastavenia);
+        let straty = Math.floor(strataLogistikaAuta + strataSaturaciaAuta + strataNedostatokAuta);
 
         let efektivita = vyrobenych / (maxVyroba - straty);
         let efektivitaPerc = (efektivita * 100).toFixed(1);
