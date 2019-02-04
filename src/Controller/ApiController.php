@@ -30,7 +30,7 @@ class ApiController extends AbstractController
         /** @var Zaznam[] $zaznamy */
         $zaznamy = $this->getDoctrine()->getRepository('App:Zaznam')->findAll();
         $uep = $this->getDoctrine()->getRepository('App:Uep')->findAll();
-        $zaznamyArr = [];
+        $zaznamyArr = [];´´´´´´´´´´
         foreach ($zaznamy as $zaznam) {
         $zaznamyArr[] = $zaznam->toArray();
     }
