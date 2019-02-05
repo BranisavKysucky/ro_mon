@@ -42,9 +42,9 @@
             </div>
 
             <div class="col">
-                <input id="nadcas" class="form-control nadcas" title="Nadcas" name="nadcas" placeholder="Nadčas"
+                <input id="nadcas" class="form-control nadcas"  title="Nadcas" name="nadcas" placeholder="Nadčas"
                        disabled/>
-                <i class="far fa-clock" style="position: absolute; top: 1.5rem; right: 5px"></i>
+                <i class="far fa-clock" style="position: absolute; top: 1.5rem; right: 5px;font-size: 0.75rem"></i>
             </div>
 
             <div class="col colBtn">
@@ -215,13 +215,13 @@
                 <div class="row karta" id="kartaRO">
                     <h2 class="no-selection"><i class="fas fa-tachometer-alt"></i> RO</h2>
                     <div style="display: inherit; margin-right: 1rem; text-align: center;">
-                        <div class="ro-title-value-item" style="margin-right: .1rem;" data-toggle="tooltip"
+                        <div class="ro-title-value-item" style="margin-right: .4rem;" data-toggle="tooltip"
                              data-placement="bottom"
                              title="Efektivita = Počet vyrobených áut / [ Teoretická výroba - Logistika - Saturácia - Nedostatok ]">
                             <h6 class="no-selection">Efektivita</h6>
                             <span id="efektivitaVal" class="ro-title-values no-selection">0 %</span>
                         </div>
-                        <div class="ro-title-value-item" style="margin-right: .5rem;" data-toggle="tooltip"
+                        <div class="ro-title-value-item" style="margin-right: 0.4rem;" data-toggle="tooltip"
                              data-placement="bottom"
                              title="RO = Počet vyrobených áut / Teoretická výroba">
                             <h6 class="no-selection">RO</h6>
@@ -231,7 +231,7 @@
                              data-placement="bottom"
                              title="Non RO = 100% - RO[%]">
                             <h6 class="no-selection">Non RO</h6>
-                            <span id="nonRoVal" class="ro-title-values no-selection">0 %</span>
+                            <span id="nonRoVal"  class="ro-title-values no-selection">0 %</span>
                         </div>
                     </div>
                 </div>
@@ -265,8 +265,8 @@
                     </div>
                     <div class="riadok" style="">
                         <div class="col-12"
-                             style="border-top: 1px solid #c5c5c5; margin-top: .5rem;">
-                            <div class="no-selection"><i class="fas fa-info-circle" data-toggle="tooltip"
+                             style="border-top: 1px solid #c5c5c5; margin-top: .7rem;">
+                            <div class="no-selection" style="line-height: 1.4 "><i class="fas fa-info-circle" data-toggle="tooltip"
                                                          data-placement="bottom"
                                                          title="Zapísať všetky zastavenia v minútach spôsobene Andonom (operátorom) + všetky zastavenia ktoré priamo spôsobilo dane UEP napr. zastavenie linky z dôvodu nečistôt na zariadení, omylom stlačene núdzové tlačidlo na zastavenie výroby atď."></i>
                                 Zastavenia FAB
@@ -275,10 +275,10 @@
                         <div class="col-2">
                             <input class="form-control ro-calc-control ro-calc-data data-in-control"
                                    name="zastavenia_fab_pocet" disabled/>
-                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px;"></i>
+                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px; font-size: .75rem;"></i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="zastavenia_fab_info" rows="2"
+                            <textarea class="form-control data-in-control" style="font-size: 0.8rem" name="zastavenia_fab_info" rows="2"
                                       disabled></textarea>
                         </div>
                         <div class="col-12">
@@ -289,12 +289,12 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input class="form-control ro-calc-control ro-calc-data data-in-control" name="udrzba_pocet"
+                            <input class="form-control ro-calc-control ro-calc-data data-in-control"  name="udrzba_pocet"
                                    disabled/>
-                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px;"></i>
+                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px;font-size: 0.75rem"></i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="udrzba_info" rows="2"
+                            <textarea class="form-control data-in-control" name="udrzba_info"  style="font-size: 0.8rem" rows="2"
                                       disabled></textarea>
                         </div>
                         <div class="col-12">
@@ -314,7 +314,7 @@
                             <i class="fas" style="position: absolute; top: 5px; right: 20px;">#</i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="pocet_zastaveni_info" rows="2"
+                            <textarea class="form-control data-in-control" name="pocet_zastaveni_info"  style="font-size: 0.8rem" rows="2"
                                       disabled></textarea>
                         </div>
                         <div class="col-12"
@@ -329,10 +329,10 @@
                             <input id="strata-logistika"
                                    class="form-control ro-calc-control ro-calc-data data-in-control"
                                    name="logistika_pocet" disabled/>
-                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px;"></i>
+                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px; font-size: 0.75rem"></i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="logistika_info" rows="2"
+                            <textarea class="form-control data-in-control" name="logistika_info" style="font-size: 0.8rem" rows="2"
                                       disabled></textarea>
                         </div>
                         <div class="col-12">
@@ -346,10 +346,10 @@
                             <input id="strata-saturacia"
                                    class="form-control ro-calc-control ro-calc-data data-in-control"
                                    name="saturacia_pocet" disabled/>
-                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px;"></i>
+                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px; font-size: 0.75rem"></i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="saturacia_info" rows="2"
+                            <textarea class="form-control data-in-control" name="saturacia_info" style="font-size: 0.8rem" rows="2"
                                       disabled></textarea>
                         </div>
                         <div class="col-12">
@@ -363,10 +363,10 @@
                             <input id="strata-nedostatok"
                                    class="form-control ro-calc-control ro-calc-data data-in-control"
                                    name="nedostatok_pocet" disabled/>
-                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px;"></i>
+                            <i class="far fa-clock" style="position: absolute; top: 5px; right: 20px; font-size: 0.75rem"></i>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control data-in-control" name="nedostatok_info" rows="2"
+                            <textarea class="form-control data-in-control" name="nedostatok_info" style="font-size: 0.8rem" rows="2"
                                       disabled></textarea>
                         </div>
                     </div>

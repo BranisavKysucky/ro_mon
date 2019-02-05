@@ -29,7 +29,7 @@ body {
 }
 
 .row {
-  margin: 0;
+  margin: -3px;
 }
 
 #navbar {
@@ -70,7 +70,8 @@ body {
 #telo {
   display: flex;
   //height: calc(100% - 5em);
-  height: 80vh;
+  height: 85vh;
+  line-height: 1.5rem;
 }
 
 #telo > .col {
@@ -87,12 +88,11 @@ body {
   position: relative;
   color: white;
   top: -1.5em;
-  height: 3.5em;
+  height: 4em;
   background-color: red;
   background: linear-gradient(14.61deg, #039BE5 16.67%, #038DD1 100%);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.14), 0px 2px 10px rgba(3, 141, 209, 0.4);
   border-radius: 3px;
-
   h2 {
     margin: 0 0 0 1rem;
   }
@@ -104,10 +104,12 @@ body {
 
   .ro-title-values {
     font-weight: bold;
-    background-color: yellowgreen;
-    padding: .25rem;
-    border-radius: .5rem;
+    background-color: white;
+    //padding: .25rem;
+    border-radius: .3rem;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    width: 13vh;
+    color:black;
   }
 }
 
@@ -135,7 +137,7 @@ body {
   border: none;
   transition: 0.4s ease;
   resize: none;
-  height: 2rem;
+  height: 2.6rem;
 
 
   &:focus {
@@ -149,6 +151,7 @@ body {
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none;
+  line-height: 1.4;
 }
 
 .telo .riadok {
@@ -223,4 +226,9 @@ body {
 
 i.fa-info-circle:hover {
   color: #9a9a9a;
+}
+
+.fa-info-circle::before {
+  content: "\F05A";
+  font-size: 0.8rem;
 }
