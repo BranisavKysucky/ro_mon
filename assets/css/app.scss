@@ -185,7 +185,7 @@ body {
   text-align: center;
   font-size: 1.4em;
   padding: 2px 0 2px 0;
-  height:2rem;
+  height:100%;
 }
 
 #ro .karta {
@@ -231,4 +231,21 @@ i.fa-info-circle:hover {
 .fa-info-circle::before {
   content: "\F05A";
   font-size: 0.8rem;
+}
+
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
